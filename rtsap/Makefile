@@ -97,8 +97,8 @@ librtsap.a:	rtsapvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			RTS_tables.o rtsapvrsn.o
 		-@rm -f $(TOPDIR)librtsap.a $(TOPDIR)llib-lrtsap
-		-@$(LN) librtsap.a $(TOPDIR)librtsap.a
-		-@$(LN) llib-lrtsap $(TOPDIR)llib-lrtsap
+		-cp librtsap.a $(TOPDIR)librtsap.a
+		-cp llib-lrtsap $(TOPDIR)llib-lrtsap
 		-@ls -l $@
 		-@echo "RtSAP library built normally"
 

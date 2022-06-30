@@ -153,7 +153,7 @@ IFP	quit;
 
 	if (iloop) {
 		for (;;) {
-			if (getline (buffer) == NOTOK)
+			if (isode_getline_ry (buffer) == NOTOK)
 				break;
 
 			if (str2vec (buffer, vec) < 1)
@@ -218,7 +218,7 @@ invoke (int sd, struct RyOperation ops[], struct dispatch *ds, char **args) {
 /*  */
 
 static int
-getline (char *buffer) {
+isode_getline_ry (char *buffer) {
 	int    i;
 	char  *cp,
 		  *ep;

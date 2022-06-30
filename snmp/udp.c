@@ -38,13 +38,16 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/udp.c,v 9.0 1992/06/16
 #include <sys/param.h>
 #endif
 #include <net/route.h>
-#include <sys/socketvar.h>
-#include <netinet/in_systm.h>
-#include <netinet/ip.h>
-#include <netinet/in_pcb.h>
-#include <netinet/ip_var.h>
-#include <netinet/udp.h>
-#include <netinet/udp_var.h>
+#include "std-legacy/netinet/in_systm.h"
+// #include "std-legacy/netinet/ip_.h"
+#include "std-legacy/netinet/in_pcb2.h"
+#include "std-legacy/netinet/ip_var.h"
+#include "std-legacy/netinet/udp.h"
+#include "std-legacy/netinet/udp_var.h"
+
+// #include <sys/socketvar.h>
+#define _WANT_SOCKET 1
+#include "std-legacy/sys/socketvar2.h"
 
 /*  */
 
@@ -60,6 +63,9 @@ static struct udpstat udpstat;
 #ifdef	BSD44
 #define	udpOutDatagrams 4
 #endif
+
+static int  get_listeners (int	offset);
+static struct udptab *get_udpent (unsigned int *ip, int	isnext);
 
 
 static int  o_udp (oi, v, offset)

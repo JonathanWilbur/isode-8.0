@@ -41,6 +41,8 @@ static char *rcsid = "$Header: /xtel/isode/isode/acsap/RCS/acsapstub.c,v 9.0 199
 
 /*    DATA */
 
+static int lpp_aet (char *designator, char *qualifier, struct isoentity *ie);
+
 static struct isoentity ies;
 
 /*  */

@@ -123,7 +123,7 @@ dsa_wait (int secs) {
 	}
 
 	DLOG (log_dsap, LLOG_TRACE, ("secs: %d; nads: %d; iads 0x%x, wads 0x%x",
-								 secs, nads, iads.fds_bits[0], wads.fds_bits[0]));
+								 secs, nads, iads.__fds_bits[0], wads.__fds_bits[0]));
 
 	if (secs != NOTOK) {
 		/* if secs == NOTOK we want to block, otherwise set watchdog, but

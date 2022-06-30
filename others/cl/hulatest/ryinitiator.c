@@ -26,7 +26,7 @@
  *                                                              *
  *  internal routines:						*
  *								*
- *	invoke(),  getline(), timer(), _advise()		*
+ *	invoke(),  isode_getline_ry(), timer(), _advise()		*
  *      tvsub(), timing_result)					*
  *								*
  ****************************************************************
@@ -261,7 +261,7 @@ IFP	quit;
 
 	if (iloop) {
 		for (;;) {
-			if (getline (buffer) == NOTOK)
+			if (isode_getline_ry (buffer) == NOTOK)
 				break;
 
 			if (str2vec (buffer, vec) < 1)
@@ -360,7 +360,7 @@ out:
 /*    INTERACTIVE */
 
 static int
-getline (char *buffer) {
+isode_getline_ry (char *buffer) {
 	int    i;
 	char  *cp,
 		  *ep;

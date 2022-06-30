@@ -53,7 +53,7 @@ extern IFP schema_fn;
 extern IFP restart_fn;
 extern AttributeType at_version;
 extern SFD attempt_restart ();
-time_t	timenow;
+extern time_t	timenow;
 
 static set_context ();
 

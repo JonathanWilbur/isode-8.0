@@ -29,7 +29,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/quipu/dish/RCS/dishlib.c,v 9.0 
 #include <signal.h>
 #include "quipu/util.h"
 #include "quipu/entry.h"
-#include <varargs.h>
+#include <stdarg.h>
 
 #ifdef	SOCKETS
 #include "internet.h"
@@ -51,7 +51,8 @@ extern Entry database_root;
 #define	OPT	(!frompipe || rps -> ps_byteno == 0 ? opt : rps)
 #define	RPS	(!frompipe || opt -> ps_byteno == 0 ? rps : opt)
 char	frompipe;
-PS	opt, rps;
+extern PS	opt;
+PS	rps;
 
 DN              savename = NULLDN;
 
@@ -626,17 +627,16 @@ int sd;
 	longjmp (dish_env,2);
 }
 
-void    advise (va_alist)
-va_dcl {
-	int     code;
+void    advise (int code, ...) {
+	char * what;
 	va_list ap;
 	extern LLog    *log_dsap;
 
-	va_start (ap);
+	va_start (ap, code);
 
-	code = va_arg (ap, int);
+	what = va_arg (ap, char	*);
 
-	_ll_log (log_dsap, code, ap);
+	_ll_log (log_dsap, code, what, ap);
 
 	va_end (ap);
 }

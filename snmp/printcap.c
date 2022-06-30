@@ -60,16 +60,16 @@ static char sccsid[] = "@(#)printcap.c	5.7 (Berkeley) 3/4/91";
 
 char   *strcpy ();
 
+static char * tdecode(char *str, char **area);
+static char * tskip(char *bp);
+
 #define PRINTCAP
 
 #ifdef PRINTCAP
 #define tgetent	pgetent
-#define tskip	pskip
 #define tgetstr	pgetstr
-#define tdecode pdecode
 #define tgetnum	pgetnum
 #define	tgetflag pgetflag
-#define tdecode pdecode
 #define tnchktc	pnchktc
 #define	tnamatch pnamatch
 #define V6

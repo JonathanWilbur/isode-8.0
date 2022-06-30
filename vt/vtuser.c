@@ -31,6 +31,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/vt/RCS/vtuser.c,v 9.0 1992/06/1
 #ifdef SVR4_UCB
 #include <termio.h>
 #else
+#include "asm_ioctls.h"
 #include <sys/ioctl.h>
 #endif
 
@@ -69,6 +70,8 @@ extern int do_break;
 extern int debug;
 
 int default_rep_flag = 0;
+
+int G_Func_Units, vcwa;
 
 /*************************************************************************/
 /* VASS_REQ - create an ASQ PDU and generate a VASSreq event to 	 */
@@ -1262,4 +1265,3 @@ vbrkcnf (PE brk_pe) {
 		vt_sup_ga(&ni_image);
 	}
 }
-

@@ -37,7 +37,7 @@ extern int		closedir();
 #endif
 
 
-#define	getcwd		_getcwd
+// #define	getcwd		_getcwd
 
 extern char             *getcwd ();
 

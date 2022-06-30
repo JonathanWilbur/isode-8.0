@@ -45,10 +45,13 @@ void	advise ();
 
 /*  */
 
-#include <pwd.h>
+#include "std-legacy/pwd.h"
 #include <grp.h>
 #include "sys.file.h"
 #include <sys/stat.h>
+
+static	free_pw ();
+static	free_gr ();
 
 
 struct pw {
@@ -110,7 +113,7 @@ struct gu {
 static	struct gu *gu_head = NULL;
 
 
-char   *mycrypt ();
+static char *mycrypt (char   *s);
 
 /*  */
 

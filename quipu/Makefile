@@ -160,7 +160,7 @@ $(ETCDIR)quiputailor: quiputailor
 		    then exit 0; \
 		    else sed -e 's%@(ETCDIR)%$(ETCDIR)%' < quiputailor > $@; ls -gls $@; \
 		fi
-		if ln $@ $@.old; \
+		if cp $@ $@.old; \
 		    then rm -f $@; sed -e 's%@(ETCDIR)%$(ETCDIR)%' < quiputailor > $@; ls -gls $@; \
 		    else exit 0; \
 		fi

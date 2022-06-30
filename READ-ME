@@ -145,7 +145,7 @@ ISODE-GEN(8)          MAINTENANCE COMMANDS           ISODE-GEN(8)
 
      Finally,
 
-          ln pickle.make CONFIG.make
+          cp pickle.make CONFIG.make
 
      (yes, that's "CONFIG" in uppercase and "make" in lowercase).
      Both  of these files are in the isode-8.0/config/ directory.
@@ -160,7 +160,7 @@ ISODE-GEN(8)          MAINTENANCE COMMANDS           ISODE-GEN(8)
 
      Now:
 
-          ln pickle.h ../h/config.h
+          cp pickle.h ../h/config.h
 
      This latter file is the one which the software uses to  con-
      figure itself during generation.
@@ -1381,6 +1381,3 @@ AUTHOR
 
 
 Sun Release 4.1    Last change: 19th June 1992                 21
-
-
-

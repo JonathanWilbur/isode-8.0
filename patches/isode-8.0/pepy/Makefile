@@ -191,7 +191,7 @@ libpepy.a:	UNIV-O $(OFILES)
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			$(UNIV-O)
 		-@rm -f $(TOPDIR)libpepy.a
-		-@$(LN) libpepy.a $(TOPDIR)libpepy.a
+		-cp libpepy.a $(TOPDIR)libpepy.a
 		-@ls -l $@
 		-@echo "PEPY library built normally"
 

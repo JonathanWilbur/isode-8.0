@@ -37,18 +37,19 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/tcp.c,v 9.0 1992/06/16
 #ifdef	BSD43
 #include <sys/param.h>
 #endif
-#include <sys/protosw.h>
+#include "std-legacy/sys/protosw.h"
 #include <sys/socketvar.h>
 #include <net/route.h>
-#include <netinet/in_systm.h>
+#include "std-legacy/netinet/in_systm.h"
 #ifdef	BSD44
-#include <netinet/ip.h>
+#include "std-legacy/netinet/ip.h"
 #endif
-#include <netinet/in_pcb.h>
-#include <netinet/tcp.h>
-#include <netinet/tcp_fsm.h>
-#include <netinet/tcp_timer.h>
-#include <netinet/tcp_var.h>
+#include "std-legacy/netinet/in_pcb2.h"
+#include "std-legacy/netinet/tcp.h"
+#include "std-legacy/netinet/tcp_fsm.h"
+#include "std-legacy/netinet/tcp_timer.h"
+#include "std-legacy/netinet/tcp_var.h"
+#include "std-legacy/sys/socketvar3.h"
 
 /*  */
 
@@ -61,6 +62,9 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/tcp.c,v 9.0 1992/06/16
 static struct tcpstat tcpstat;
 
 static int tcpConnections;
+
+static int  get_connections (int	offset);
+static struct tcptab *get_tcpent (unsigned int *ip, int	isnext);
 
 /*  */
 
@@ -508,7 +512,7 @@ out:
 
 /*    UNIX */
 
-#include <sys/mbuf.h>
+#include "std-legacy/sys/mbuf.h"
 
 
 static	int	unixNetstat = 1;

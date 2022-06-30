@@ -116,8 +116,8 @@ libcommon.a:    commonvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			commonvrsn.o
 		-@rm -f $(UPDIR)libcommon.a $(UPDIR)llib-lcommon
-		-@ln libcommon.a $(UPDIR)libcommon.a
-		-@$(LN) llib-lcommon $(UPDIR)llib-lcommon
+		-@cp libcommon.a $(UPDIR)libcommon.a
+		-cp llib-lcommon $(UPDIR)llib-lcommon
 		-@ls -l $@
 		-@echo "QUIPU COMMON library built normally"
 

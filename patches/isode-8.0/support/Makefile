@@ -116,7 +116,7 @@ iaed.o:		$(HFILES) $(HDIR)x25.h $(HDIR)logger.h $(HDIR)tailor.h \
 				$(HDIR)quipu/ds_error.h $(HDIR)quipu/dap.h \
 			$(HDIR)quipu/ds_search.h tsapd.c
 		-@rm -f iaed.c
-		ln tsapd.c iaed.c
+		cp tsapd.c iaed.c
 		$(CC) $(CFLAGS) -DIAE -c iaed.c
 		-@rm -f iaed.c
 
@@ -164,11 +164,11 @@ $(SBINDIR)isod.tsap:	xisod
 			$(SBINDIR)isod.rtsap \
 			$(SBINDIR)isod.rosap
 		cp xisod $@
-		-ln $@  $(SBINDIR)isod.ssap
-		-ln $@  $(SBINDIR)isod.psap
-		-ln $@  $(SBINDIR)isod.acsap
-		-ln $@  $(SBINDIR)isod.rtsap
-		-ln $@  $(SBINDIR)isod.rosap
+		-cp $@  $(SBINDIR)isod.ssap
+		-cp $@  $(SBINDIR)isod.psap
+		-cp $@  $(SBINDIR)isod.acsap
+		-cp $@  $(SBINDIR)isod.rtsap
+		-cp $@  $(SBINDIR)isod.rosap
 		-@ls -gls $@
 		-@echo ""
 
@@ -244,7 +244,7 @@ libisode.a:	isodevrsn.o
 		-rm -f $@ $(TOPDIR)libisode.a
 		-rm -rf tmp
 		-mkdir tmp
-		ln isodevrsn.o tmp
+		cp isodevrsn.o tmp
 		for i in $(LIBES); do (cd tmp; ar x ../$$i; \
 		    rm -f __* ; \
 		    ../$(UTILDIR)make-lib.sh -quick $(SYSTEM) $(ARFLAGS) ../$@ *; \
@@ -252,7 +252,7 @@ libisode.a:	isodevrsn.o
 		$(UTILDIR)make-lib.sh $(SYSTEM) $@ -ranlib
 		-rm -rf tmp
 		-@rm -f $(TOPDIR)libisode.a
-		-@$(LN) $@ $(TOPDIR)libisode.a
+		-cp $@ $(TOPDIR)libisode.a
 		-@ls -l $@
 		-@echo "ISODE library built normally"
 
@@ -268,7 +268,7 @@ libisode-shared: isodevrsn.o
 		@for i in libisode.s[ao]* ;\
 		do \
 			rm -f $(TOPDIR)$$i; \
-			$(LN) $$i $(TOPDIR)$$i; \
+			cp $$i $(TOPDIR)$$i; \
 			ls -l $$i; \
 		done
 		@echo "shared ISODE library built normally"
@@ -280,7 +280,7 @@ llib-lisode:	$(LLIBS)
 		-@echo '' >> $@
 		cat $(LLIBS) >> $@
 		-@rm -f $(TOPDIR)llib-lisode
-		-@$(LN) llib-lisode $(TOPDIR)llib-lisode
+		-cp llib-lisode $(TOPDIR)llib-lisode
 
 isodevrsn.c:	$(LIBES)
 		@$(UTILDIR)version.sh isode > $@

@@ -368,7 +368,7 @@ main (int argc, char **argv, char **envp) {
 			}
 		}
 
-		if (getline ("%s> ", buffer) == NOTOK) {
+		if (isode_getline ("%s> ", buffer) == NOTOK) {
 			if (eof)
 				break;
 
@@ -500,7 +500,7 @@ arginit (char **vec) {
 /*    INTERACTIVE */
 
 int
-getline (char *prompt, char *buffer) {
+isode_getline (char *prompt, char *buffer) {
 	int    i;
 	char  *cp,
 		  *ep;

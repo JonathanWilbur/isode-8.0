@@ -59,7 +59,7 @@ Filter          get_filter ();
 char           *TidyString ();
 char		allow_move = TRUE;
 
-int		csr_compar ();
+static	int  csr_compar (EntryInfo **a, EntryInfo **b);
 
 int
 call_search (int argc, char **argv) {
@@ -390,10 +390,7 @@ call_search (int argc, char **argv) {
 	filter_free (search_arg.sra_filter);
 }
 
-static	int  csr_compar (a, b)
-EntryInfo **a,
-		  **b;
-{
+static int  csr_compar (EntryInfo **a, EntryInfo **b) {
 	int	    i;
 	DN	    adn,
 	 bdn;
@@ -438,10 +435,7 @@ check_rdn:
 	return (i == (-1) || i == 1 ? i : 0);
 }
 
-handle_problems (aps,cr,limit,proceed)
-PS aps;
-ContinuationRef cr;
-int limit;
+void handle_problems (PS aps, ContinuationRef cr, int limit, char proceed)
 {
 	if (! proceed)
 		return;

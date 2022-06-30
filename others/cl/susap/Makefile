@@ -59,8 +59,8 @@ libsusap.a:	susapvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			susapvrsn.o
 		-@rm -f $(TOPDIR)libsusap.a $(TOPDIR)llib-lsusap
-		-@ln libsusap.a $(TOPDIR)libsusap.a
-		-@ln llib-lssap $(TOPDIR)llib-lssap
+		-@cp libsusap.a $(TOPDIR)libsusap.a
+		-@cp llib-lssap $(TOPDIR)llib-lssap
 		-@ls -l $@
 		-@echo "SuSAP library built normally"
 

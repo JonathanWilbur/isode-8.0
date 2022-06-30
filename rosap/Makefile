@@ -102,8 +102,8 @@ librosap.a:	rosapvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			ROS_tables.o rosapvrsn.o
 		-@rm -f $(TOPDIR)librosap.a $(TOPDIR)llib-lrosap
-		-@$(LN) librosap.a $(TOPDIR)librosap.a
-		-@$(LN) llib-lrosap $(TOPDIR)llib-lrosap
+		-cp librosap.a $(TOPDIR)librosap.a
+		-cp llib-lrosap $(TOPDIR)llib-lrosap
 		-@ls -l $@
 		-@echo "RoSAP library built normally"
 

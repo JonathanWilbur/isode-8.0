@@ -109,8 +109,8 @@ libpsap.a:	psapvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			psapvrsn.o
 		-@rm -f $(TOPDIR)libpsap.a $(TOPDIR)llib-lpsap
-		-@$(LN) libpsap.a $(TOPDIR)libpsap.a
-		-@$(LN) llib-lpsap $(TOPDIR)llib-lpsap
+		-cp libpsap.a $(TOPDIR)libpsap.a
+		-cp llib-lpsap $(TOPDIR)llib-lpsap
 		-@ls -l $@
 		-@echo "PSAP library built normally"
 

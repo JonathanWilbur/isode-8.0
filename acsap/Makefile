@@ -114,9 +114,9 @@ $(PEPSYDIR)$(TARGET):	$(TARGET)
 libacsap:	libacsap.a true
 		-@rm -f $(TOPDIR)h/ACS*.h $(TOPDIR)h/OACS*.h \
 		        $(TOPDIR)h/DSE*.h
-		-@$(LN) ACS-types.h $(TOPDIR)h/ACS-types.h
-		-@$(LN) OACS-types.h $(TOPDIR)h/OACS-types.h
-		-@$(LN) DSE-types.h $(TOPDIR)h/DSE-types.h
+		-cp ACS-types.h $(TOPDIR)h/ACS-types.h
+		-cp OACS-types.h $(TOPDIR)h/OACS-types.h
+		-cp DSE-types.h $(TOPDIR)h/DSE-types.h
 
 libacsap.a:	acsapvrsn.o
 		-rm -f $@
@@ -124,8 +124,8 @@ libacsap.a:	acsapvrsn.o
 			ACS_tables.o OACS_tables.o DSE_tables.o DASE_tables.o \
 			acsapvrsn.o
 		-@rm -f $(TOPDIR)libacsap.a $(TOPDIR)llib-lacsap
-		-@$(LN) libacsap.a $(TOPDIR)libacsap.a
-		-@$(LN) llib-lacsap $(TOPDIR)llib-lacsap
+		-cp libacsap.a $(TOPDIR)libacsap.a
+		-cp llib-lacsap $(TOPDIR)llib-lacsap
 		-@ls -l $@
 		-@echo "AcSAP library built normally"
 
@@ -234,6 +234,7 @@ $(SBINDIR)dased:	xdased
 		-@echo ""
 
 dased:		xdased
+		-@echo "XDASED built normally"
 
 xdased:		dased.o DASE_tables.o $(TOPDIR)libdsap.a $(TOPDIR)libisode.a
 		$(LDCC) $(LDFLAGS) -o $@ dased.o DASE_tables.o \

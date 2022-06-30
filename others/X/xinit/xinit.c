@@ -105,7 +105,7 @@ char *displayNum;
 char *program;
 Display *xd;			/* server connection */
 #ifndef SYSV
-union wait	status;
+int status;
 #endif /* SYSV */
 int serverpid = -1;
 int clientpid = -1;

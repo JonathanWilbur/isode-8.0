@@ -82,7 +82,7 @@ $(BINDIR)pepsy:	xpepsy
 
 pepsy:		xpepsy
 		rm -rf pepsy
-		ln xpepsy pepsy
+		cp xpepsy pepsy
 
 xpepsy:		pepsyvrsn.o $(PEPSYLIBES)
 		$(LDCC) $(LDFLAGS) -o $@ $(PEPSY-O) \
@@ -147,13 +147,13 @@ inst-libpepsy:	$(LIBDIR)libpepsy.a inst-headers
 
 libpepsy:	libpepsy.a true
 		-@rm -f $(TOPDIR)h/UNIV*.h
-		-@$(LN) UNIV-types.h $(TOPDIR)h/UNIV-types.h
+		-cp UNIV-types.h $(TOPDIR)h/UNIV-types.h
 
 libpepsy.a:     $(LIBFILES)
 	        -rm -f $@
 	        @$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(LIBFILES)
 	        -@rm -f $(TOPDIR)libpepsy.a
-	        -@$(LN) libpepsy.a $(TOPDIR)libpepsy.a
+	        -cp libpepsy.a $(TOPDIR)libpepsy.a
 	        -@ls -l $@
 	        -@echo "PEPSY library built normally"
 

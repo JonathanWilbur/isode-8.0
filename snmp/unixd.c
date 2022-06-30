@@ -32,11 +32,18 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/unixd.c,v 9.0 1992/06/
 
 #include <signal.h>
 #include <stdio.h>
-#include <varargs.h>
+#include <stdarg.h>
 #include "smux.h"
 #include "objects.h"
 #include "sys.file.h"
 #include "tailor.h"
+
+static	arginit (char	**vec);
+static  envinit ();
+static  mibinit ();
+static	start_smux ();
+static	doit_smux ();
+static	do_smux (struct type_SNMP_GetRequest__PDU *pdu, int	offset);
 
 /*    DATA */
 
@@ -84,7 +91,6 @@ static	fd_set	ifds;
 static	fd_set	ofds;
 
 
-void	adios (), advise ();
 
 /*    MAIN */
 
@@ -522,13 +528,12 @@ out:
 /*    ERRORS */
 
 #ifndef	lint
-void	adios (va_alist)
-va_dcl {
+void	adios (char *what, ...) {
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, what);
 
-	_ll_log (pgm_log, LLOG_FATAL, ap);
+	_ll_log (pgm_log, LLOG_FATAL, what, ap);
 
 	va_end (ap);
 
@@ -547,16 +552,15 @@ char   *what,
 
 
 #ifndef	lint
-void	advise (va_alist)
-va_dcl {
-	int	    code;
+void	advise (int code, ...) {
+	char *what;
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, code);
 
-	code = va_arg (ap, int);
+	what = va_arg (ap, char *);
 
-	_ll_log (pgm_log, code, ap);
+	_ll_log (pgm_log, code, what, ap);
 
 	va_end (ap);
 }

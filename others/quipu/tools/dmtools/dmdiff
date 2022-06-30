@@ -63,7 +63,7 @@ END {
 	lastRootedAt = ""
 	printedRootedAt = "FALSE"
 	printedSource = "FALSE"
-	while (getline < FILENAME >0)
+	while (isode_getline < FILENAME >0)
 	{
 		if (substr($0,1,1) == "#")
 			continue
@@ -122,9 +122,9 @@ function getValue(       thisValue) {
 	while (substr(thisValue, length(thisValue), 1) == "\\")
 	{
 		if (pass == "1")
-			retval = getline 
+			retval = isode_getline 
 		else
-			retval = getline < FILENAME
+			retval = isode_getline < FILENAME
 		if (retval > 0)
 		{
 			thisValue = thisValue "\n" $0
@@ -202,7 +202,7 @@ function newEntry() {
 	printRooted()
 	print "# THIS IS A NEW ENTRY"
 	print $0
-	while (getline < FILENAME >0)
+	while (isode_getline < FILENAME >0)
 	{
 		if (length($0) == 0)
 		{

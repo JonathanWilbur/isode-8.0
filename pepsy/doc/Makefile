@@ -7,4 +7,4 @@ pepsy.info: $(FILES)
 DESCRIPTION: $(FILES)
 	-rm -f ../DESCRIPTION
 	nroff -ms $(FILES) > DESCRIPTION
-	ln DESCRIPTION ..
+	cp DESCRIPTION ..

@@ -46,13 +46,14 @@ HFILES	=	$(HDIR)ftam.h \
 		$(HDIR)acsap.h $(HDIR)psap2.h $(HDIR)psap.h $(HDIR)ssap.h \
 		$(HDIR)isoaddrs.h \
 		$(HDIR)manifest.h $(HDIR)general.h $(HDIR)config.h
+LSOCKET	=	-lm -lcrypt
 
 
 ##################################################################
 # Here it is...
 ##################################################################
 
-all:		ftamd ftam
+all:		ftamd ftam ftamd-ftam
 inst-all:	inst-ftamd inst-ftam manuals
 install:	inst-all clean
 lint:		l-ftamd l-ftam
@@ -72,6 +73,7 @@ $(SBINDIR)iso.ftam:	xftamd
 		-@echo ""
 
 ftamd:		xftamd
+		-@echo "XFTAMD library built normally"
 
 xftamd:		ftamd.o ftamsystem.o ftamd-manage.o ftamd-select.o \
 			ftamd-trans.o ftamsbr.o DOCS_tables.o $(LIBD)
@@ -107,6 +109,7 @@ $(BINDIR)ftam:	xftam
 		-@echo ""
 
 ftam:		xftam
+		-@echo ""
 
 xftam:		ftam.o ftamuser.o ftam-assoc.o ftam-dir.o ftam-get.o \
 			ftam-glob.o ftam-ls.o ftam-mgmt.o ftam-put.o \
@@ -139,6 +142,9 @@ ftam-put.o:	ftamuser.h ftamsbr.h DOCS-types.h $(HFILES)
 ##################################################################
 # ftamsbr/DOCS
 ##################################################################
+
+ftamd-ftam:
+		-@echo "XFTAM library built normally"
 
 ftamsbr.o:	ftamsbr.h DOCS-types.h $(HFILES)
 

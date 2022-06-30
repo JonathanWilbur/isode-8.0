@@ -36,6 +36,10 @@ static char *rcsid = "$Header: /xtel/isode/isode/psap2-lpp/RCS/psaprovider.c,v 9
 #include "ppkt.h"
 #include "tailor.h"
 
+static int  PReadRequestAux (struct psapblk *pb, struct PSAPdata *px, struct PSAPindication *pi);
+static int  qb_cmp (struct qbuf *qb1, struct qbuf *qb2);
+static int  PDataRequestAux ();
+
 /*    DATA */
 
 static int  once_only = 0;

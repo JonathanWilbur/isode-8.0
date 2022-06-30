@@ -69,7 +69,7 @@ int format;
 #ifdef SVR4
 	int	status;
 #else
-	union wait status;
+	pid_t wait(int *wstatus);
 #endif
 
 	SFP	pstat;

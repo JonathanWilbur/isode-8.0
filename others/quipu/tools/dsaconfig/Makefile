@@ -71,7 +71,7 @@ $(ETCDIR)dsaptailor: dsaptailor $(TOPDIR)dsap/dsaptailor.root-dsas
 		    then exit 0; \
 		    else cat dsaptailor $(TOPDIR)dsap/dsaptailor.root-dsas > $@; ls -gls $@; \
 		fi
-		if ln $@ $@.old; \
+		if cp $@ $@.old; \
 		    then rm -f $@; cat dsaptailor $(TOPDIR)dsap/dsaptailor.root-dsas > $@; ls -gls $@; \
 		    else exit 0; \
 		fi

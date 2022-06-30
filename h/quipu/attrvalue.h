@@ -43,6 +43,8 @@ AV_Sequence  avs_cpy ();
 AV_Sequence  avs_merge ();
 AV_Sequence  str2avs ();
 
+static struct acl_info * acl_info_cpy (struct acl_info *aclptr);
+
 typedef struct attrcomp {       /* A sequence of attributes             */
 	/* represents Attribute                 */
 	/* and SET OF Attribute                 */

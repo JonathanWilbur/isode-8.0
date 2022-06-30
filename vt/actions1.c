@@ -37,7 +37,19 @@ static char *rcsid = "$Header: /xtel/isode/isode/vt/RCS/actions1.c,v 9.0 1992/06
 /*	of ISO 9041.							*/
 /************************************************************************/
 
-extern int sd;		/*Global Session Descriptor (ISODE) */
+int sd;		/*Global Session Descriptor (ISODE) */
+
+int vnt,
+    dr_pm_st,
+    vsmd,
+    vrsl,
+    vena,
+    waca,
+    vtok,
+    vns,
+    waci,
+    vra,
+    vrea;
 
 #define	invalid_result(str,pe) \
     	adios (NULLCP, "%s: invalid result (%s)", (str), \
@@ -752,4 +764,3 @@ a1_107 (		/*Generic Action*/
 	/*Stay in this state*/
 	return(OK);
 }
-

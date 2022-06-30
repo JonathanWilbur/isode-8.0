@@ -137,8 +137,8 @@ libacusap.a:	acusapvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			$(ACS-O) acusapvrsn.o
 		-@rm -f $(TOPDIR)libacusap.a $(TOPDIR)llib-lacusap
-		-@ln libacusap.a $(TOPDIR)libacusap.a
-		-@ln llib-lacusap $(TOPDIR)llib-lacusap
+		-@cp libacusap.a $(TOPDIR)libacusap.a
+		-@cp llib-lacusap $(TOPDIR)llib-lacusap
 		-@ls -l $@
 		-@echo "AcuSAP library built normally"
 
@@ -291,4 +291,3 @@ grind:;		iprint Makefile
 			sh -ve
 
 true:;
-

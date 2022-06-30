@@ -158,8 +158,8 @@ librosy.a:	$(OFILES)
 		-rm -f $@
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES)
 		-@rm -f $(TOPDIR)librosy.a $(TOPDIR)llib-lrosy
-		-@$(LN) librosy.a $(TOPDIR)librosy.a
-		-@$(LN) llib-lrosy $(TOPDIR)llib-lrosy
+		-cp librosy.a $(TOPDIR)librosy.a
+		-cp llib-lrosy $(TOPDIR)llib-lrosy
 		-@ls -l $@
 		-@echo "ROSY library built normally"
 
@@ -169,85 +169,85 @@ l-librosy:	$(CFILES) true
 
 p-rydiscard.o:	$(HFILES) $(PEPSYFILES) rydiscard.c
 		-@rm -f p-rydiscard.c
-		ln rydiscard.c p-rydiscard.c
+		cp rydiscard.c p-rydiscard.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rydiscard.c
 		-@rm -f p-rydiscard.c
 
 p-rygenid.o:	$(HFILES) $(PEPSYFILES) rygenid.c
 		-@rm -f p-rygenid.c
-		ln rygenid.c p-rygenid.c
+		cp rygenid.c p-rygenid.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rygenid.c
 		-@rm -f p-rygenid.c
 
 p-rystub.o:	$(HFILES) $(PEPSYFILES) rystub.c
 		-@rm -f p-rystub.c
-		ln rystub.c p-rystub.c
+		cp rystub.c p-rystub.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rystub.c
 		-@rm -f p-rystub.c
 
 p-rywait.o:	$(HFILES) $(PEPSYFILES) rywait.c
 		-@rm -f p-rywait.c
-		ln rywait.c p-rywait.c
+		cp rywait.c p-rywait.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rywait.c
 		-@rm -f p-rywait.c
 
 p-ryoper.o:	 $(HFILES) $(PEPSYFILES) ryoper.c
 		-@rm -f p-ryoper.c
-		ln ryoper.c p-ryoper.c
+		cp ryoper.c p-ryoper.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-ryoper.c
 		-@rm -f p-ryoper.c
 
 p-ryopinvoke.o: $(HFILES) $(PEPSYFILES) ryopinvoke.c
 		-@rm -f p-ryopinvoke.c
-		ln ryopinvoke.c p-ryopinvoke.c
+		cp ryopinvoke.c p-ryopinvoke.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-ryopinvoke.c
 		-@rm -f p-ryopinvoke.c
 
 p-rydispatch.o:	$(HFILES) $(PEPSYFILES) rydispatch.c
 		-@rm -f p-rydispatch.c
-		ln rydispatch.c p-rydispatch.c
+		cp rydispatch.c p-rydispatch.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rydispatch.c
 		-@rm -f p-rydispatch.c
 
 p-rydsresult.o:	$(HFILES) $(PEPSYFILES) rydsresult.c
 		-@rm -f p-rydsresult.c
-		ln rydsresult.c p-rydsresult.c
+		cp rydsresult.c p-rydsresult.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rydsresult.c
 		-@rm -f p-rydsresult.c
 
 p-rydserror.o:	$(HFILES) $(PEPSYFILES) rydserror.c
 		-@rm -f p-rydserror.c
-		ln rydserror.c p-rydserror.c
+		cp rydserror.c p-rydserror.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rydserror.c
 		-@rm -f p-rydserror.c
 
 p-rydsurej.o: $(HFILES) $(PEPSYFILES) rydsurej.c
 		-@rm -f p-rydsurej.c
-		ln rydsurej.c p-rydsurej.c
+		cp rydsurej.c p-rydsurej.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rydsurej.c
 		-@rm -f p-rydsurej.c
 
 p-ryopblock.o:	$(HFILES) $(PEPSYFILES) ryopblock.c
 		-@rm -f p-ryopblock.c
-		ln ryopblock.c p-ryopblock.c
+		cp ryopblock.c p-ryopblock.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-ryopblock.c
 		-@rm -f p-ryopblock.c
 
 p-rydsblock.o:	$(HFILES) $(PEPSYFILES) rydsblock.c
 		-@rm -f p-rydsblock.c
-		ln rydsblock.c p-rydsblock.c
+		cp rydsblock.c p-rydsblock.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rydsblock.c
 		-@rm -f p-rydsblock.c
 
 p-ryfind.o:	$(HFILES) $(PEPSYFILES) ryfind.c
 		-@rm -f p-ryfind.c
-		ln ryfind.c p-ryfind.c
+		cp ryfind.c p-ryfind.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-ryfind.c
 		-@rm -f p-ryfind.c
 
 p-rylose.o:	$(HFILES) $(PEPSYFILES) rylose.c
 		-@rm -f p-rylose.c
-		ln rylose.c p-rylose.c
+		cp rylose.c p-rylose.c
 		$(CC) $(LIBCFLAGS) -DPEPSY_VERSION=2 -c p-rylose.c
 		-@rm -f p-rylose.c
 

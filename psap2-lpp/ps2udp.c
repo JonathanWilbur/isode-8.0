@@ -41,6 +41,8 @@ static char *rcsid = "$Header: /xtel/isode/isode/psap2-lpp/RCS/ps2udp.c,v 9.0 19
 #include "internet.h"
 
 
+static int  udpretry (struct psapblk *pb, int	reason, struct PSAPindication *pi);
+static int  PUservice (struct psapblk *pb, int	fd);
 
 
 /*  */

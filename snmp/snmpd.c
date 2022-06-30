@@ -39,7 +39,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/snmpd.c,v 9.0 1992/06/
 #include <errno.h>
 #include <signal.h>
 #include <stdio.h>
-#include <varargs.h>
+#include <stdarg.h>
 #include "mib.h"
 #include "sys.file.h"
 #include <sys/stat.h>
@@ -134,10 +134,40 @@ static char	source[BUFSIZ];
 #ifdef	DEBUG
 static	int	didhup = OK;
 
-SFD	hupser ();
+static SFD  hupser (int	sig);
 #endif
 
-void	adios (), advise ();
+static void  ts_advise (struct TSAPdisconnect *td, int	code, char   *event);
+static	doit_udp (int	pd);
+static	doit_aux (int	fd, struct NSAPaddr *na, IFP	rfx, IFP wfx, IFP cfx);
+static int  process (PS	ps, struct type_SNMP_Message *msg, struct NSAPaddr *na, int	size);
+static int  do_operation (PS	ps, struct type_SNMP_Message *msg,
+	struct community *comm, int	size);
+static int  do_pass (struct type_SNMP_Message *msg, int	offset, struct view *vu);
+static	gc_set ();
+static int  proxy1 (PS	psp, struct type_SNMP_Message *msg, struct community *comm);
+static int  proxy2 (struct type_SNMP_Message *msg);
+static int  start_smux ();
+static int  doit_smux (int	fd);
+static	smux_process (struct smuxPeer *pb, struct type_SNMP_SMUX__PDUs *pdu);
+static int  smux_method (struct type_SNMP_PDUs *pdu, OT	ot,
+	struct smuxPeer *pb, struct type_SNMP_VarBind *v, int	offset);
+static	pb_free (struct smuxPeer *pb);
+static	tb_free (struct smuxTree *tb);
+static	export_view (OT	ot);
+static	struct community *str2comm (char   *name, struct NSAPaddr *na);
+static	do_trap (int	generic, int specific, struct type_SNMP_VarBindList *bindings);
+static	do_traps (struct type_SNMP_Message *msg, integer	generic, integer specific);
+static	arginit (char	**vec);
+static  envinit ();
+static SFD  hupser (int	sig);
+static	readconfig ();
+
+static int  f_logging (char  **vec);
+static int  f_variable (char  **vec);
+
+void	advise (int code, ...);
+
 void	ts_advise ();
 
 
@@ -3082,13 +3112,12 @@ char  **vec;
 /*    ERRORS */
 
 #ifndef	lint
-void	adios (va_alist)
-va_dcl {
+void	adios (char *what, ...) {
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, what);
 
-	_ll_log (pgm_log, LLOG_FATAL, ap);
+	_ll_log (pgm_log, LLOG_FATAL, what, ap);
 
 	va_end (ap);
 
@@ -3107,16 +3136,15 @@ char   *what,
 
 
 #ifndef	lint
-void	advise (va_alist)
-va_dcl {
-	int	    code;
+void	advise (int code, ...) {
+	char *what;
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, code);
 
-	code = va_arg (ap, int);
+	what = va_arg (ap, char *);
 
-	_ll_log (pgm_log, code, ap);
+	_ll_log (pgm_log, code, what, ap);
 
 	va_end (ap);
 }

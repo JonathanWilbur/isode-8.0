@@ -78,6 +78,7 @@ $(BINDIR)dish:	xdish
 		-@echo ""
 
 dish:		xdish
+		-@echo "XDISH library built normally"
 
 xdish:		libdish.a dish.o $(LIBES)
 		$(LDCC) $(LDFLAGS) -o $@ dish.o $(LIBDISH) \
@@ -138,7 +139,7 @@ libdish-shared: dishvrsn.o
 		@for i in libdish.s[ao]* ;\
 		do \
 			rm -f $(TOPDIR)$$i; \
-			$(LN) $$i $(TOPDIR)$$i; \
+			cp $$i $(TOPDIR)$$i; \
 			ls -l $$i; \
 		done
 		@echo "shared DISH library built normally"

@@ -32,6 +32,8 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/smux-g.c,v 9.0 1992/06
 #endif
 #include "smux-g.h"
 
+static struct smuxTree *get_tbent (unsigned int *ip, int	len, int	isnext);
+
 /*    SMUX GROUP */
 
 #ifdef	SMUX

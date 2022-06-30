@@ -98,7 +98,7 @@ $(ETCDIR)de/detailor: detailor
 		    then exit 0; \
 		    else cp detailor $@; ls -gls $@; \
 		fi
-		if ln $(ETCDIR)de/detailor $(ETCDIR)de/detailor.old; \
+		if cp $(ETCDIR)de/detailor $(ETCDIR)de/detailor.old; \
 		    then rm -f $@ ; cp detailor $@; ls -gls $@; \
 		    else exit 0; \
 		fi
@@ -123,5 +123,3 @@ clean:;         rm -f *.ph *.o *.a a.out _* x* z* *.orig core
 grind:;         
 
 true:;
-
-

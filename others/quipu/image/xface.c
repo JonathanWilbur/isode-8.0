@@ -106,7 +106,7 @@ main (int argc, char **argv, char **envp) {
 		errsw = NOTOK;
 
 	for (;;) {
-		if ((portsw > 0 ? readsocket (buffer) : getline (buffer)) == NOTOK)
+		if ((portsw > 0 ? readsocket (buffer) : isode_getline (buffer)) == NOTOK)
 			break;
 
 		if (str2vec (buffer, vec) != 2)
@@ -136,7 +136,7 @@ fetch_face (char *host, char *user) {
 /*  */
 
 static int
-getline (char *buffer) {
+isode_getline (char *buffer) {
 	int    i;
 	char  *cp,
 		  *ep;

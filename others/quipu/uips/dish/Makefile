@@ -70,27 +70,27 @@ $(BINDIR)list:	xpipe
 		-rm -f $@
 		cp xpipe $@
 		-rm -f $(BINDIR)compare
-		ln $@ $(BINDIR)compare
+		cp $@ $(BINDIR)compare
 		-rm -f $(BINDIR)search
-		ln $@ $(BINDIR)search
+		cp $@ $(BINDIR)search
 		-rm -f $(BINDIR)add
-		ln $@ $(BINDIR)add
+		cp $@ $(BINDIR)add
 		-rm -f $(BINDIR)delete
-		ln $@ $(BINDIR)delete
+		cp $@ $(BINDIR)delete
 		-rm -f $(BINDIR)modify
-		ln $@ $(BINDIR)modify
+		cp $@ $(BINDIR)modify
 		-rm -f $(BINDIR)modifyrdn
-		ln $@ $(BINDIR)modifyrdn
+		cp $@ $(BINDIR)modifyrdn
 		-rm -f $(BINDIR)showentry
-		ln $@ $(BINDIR)showentry
+		cp $@ $(BINDIR)showentry
 		-rm -f $(BINDIR)showname
-		ln $@ $(BINDIR)showname
+		cp $@ $(BINDIR)showname
 		-rm -f $(BINDIR)bind
-		ln $@ $(BINDIR)bind
+		cp $@ $(BINDIR)bind
 		-rm -f $(BINDIR)moveto
-		ln $@ $(BINDIR)moveto
+		cp $@ $(BINDIR)moveto
 		-rm -f $(BINDIR)dsacontrol
-		ln $@ $(BINDIR)dsacontrol
+		cp $@ $(BINDIR)dsacontrol
 		-@ls -gls $@
 		-@echo ""
 
@@ -113,7 +113,7 @@ $(BINDIR)unbind: xunbind
 		-rm -f $@
 		cp xunbind $@
 		-rm -f $(BINDIR)squid
-		ln $@ $(BINDIR)squid
+		cp $@ $(BINDIR)squid
 		-@ls -gls $@
 		-@echo ""
 

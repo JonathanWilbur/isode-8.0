@@ -125,11 +125,11 @@ inst-shelldish:	$(BINDIR)add_alias $(BINDIR)del_alias $(BINDIR)dish
 
 $(BINDIR)add_alias:
 		-rm -f $@
-		ln $(BINDIR)list $@
+		cp $(BINDIR)list $@
 
 $(BINDIR)del_alias:
 		-rm -f $@
-		ln $(BINDIR)list $@
+		cp $(BINDIR)list $@
 		
 $(BINDIR)dish:	$(BINDIR)dish_manage
 		-cp $@ zxdish

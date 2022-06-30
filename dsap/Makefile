@@ -111,7 +111,7 @@ libdsap.a:      dsapvrsn.o
 		-rm -f $@ $(TOPDIR)libdsap.a
 		-rm -rf tmp
 		-mkdir tmp
-		$(LN) dsapvrsn.o tmp
+		cp dsapvrsn.o tmp
 		for i in $(LIBES); do (cd tmp; ar x ../$$i; \
 		    rm -f __* ; \
 		    ../$(UTILDIR)make-lib.sh -quick $(SYSTEM) $(ARFLAGS) ../$@ *; \
@@ -119,7 +119,7 @@ libdsap.a:      dsapvrsn.o
 		$(UTILDIR)make-lib.sh $(SYSTEM) $@ -ranlib
 		-rm -rf tmp
 		-@rm -f $(TOPDIR)libdsap.a
-		-@$(LN) $@ $(TOPDIR)libdsap.a
+		-cp $@ $(TOPDIR)libdsap.a
 		-@ls -l $@
 		-@echo "DSAP library built normally"
 
@@ -135,7 +135,7 @@ libdsap-shared: dsapvrsn.o
 		@for i in libdsap.s[ao]* ;\
 		do \
 			rm -f $(TOPDIR)$$i; \
-			$(LN) $$i $(TOPDIR)$$i; \
+			cp $$i $(TOPDIR)$$i; \
 			ls -l $$i; \
 		done
 		@echo "shared DSAP library built normally"
@@ -147,7 +147,7 @@ llib-ldsap:     $(LLIBS)
 		-@echo '' >> $@
 		cat $(LLIBS) >> $@
 		-@rm -f $(TOPDIR)llib-ldsap
-		-@$(LN) llib-ldsap $(TOPDIR)llib-ldsap
+		-cp llib-ldsap $(TOPDIR)llib-ldsap
 
 dsapvrsn.c:     $(LIBES)
 		@$(UTILDIR)version.sh dsap > $@
@@ -165,7 +165,7 @@ $(ETCDIR)dsaptailor: dsaptailor dsaptailor.root-dsas
 		    else cat dsaptailor dsaptailor.root-dsas > $@; \
 			 chmod a+r $@ ; ls -gls $@; \
 		fi
-		if ln $@ $@.old; \
+		if cp $@ $@.old; \
 		    then rm -f $@; cat dsaptailor dsaptailor.root-dsas > $@; \
 		         chmod a+r $@ ; ls -gls $@; \
 		    else exit 0; \
@@ -206,7 +206,7 @@ $(ETCDIR)ufnrc: true
 		    then exit 0; \
 		    else cp ufnrc $@; chmod a+r $@ ; ls -gls $@; \
 		fi
-		if ln $(ETCDIR)ufnrc $(ETCDIR)ufnrc.old; \
+		if cp $(ETCDIR)ufnrc $(ETCDIR)ufnrc.old; \
 		    then rm -f $@ ; cp ufnrc $@; chmod a+r $@ ; ls -gls $@; \
 		    else exit 0; \
 		fi

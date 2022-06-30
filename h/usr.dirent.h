@@ -51,12 +51,12 @@ extern int		closedir();
 #endif
 #endif	/* not GETDENTS */
 
-#define	getcwd		_getcwd
+// #define	getcwd		_getcwd
 
 extern char             *getcwd ();
 
 
-#define	scandir	_scandir
+// #define	scandir	_scandir
 #define	alphasort _alphasort
 
 extern char *direntversion;

@@ -63,6 +63,11 @@ void	advise ();
 #endif /* NOTOK */
 
 
+int	type;
+char	bytename[32];		/* local byte size in ascii */
+int ftp_directory;
+
+
 /*
  * ftp_login: establish command connection with remote host
  * then execute login process.
@@ -339,4 +344,3 @@ char *filename;
 	return NOTOK;
 
 }
-

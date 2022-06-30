@@ -38,7 +38,7 @@ extern LLog _fred_log, *fred_log;
 
 
 void	adios (), advise ();
-int	ask (), getline ();
+int	ask (), isode_getline ();
 char   *strdup ();
 
 /*    DATA */
@@ -126,4 +126,3 @@ extern char *whois_help[];
 /*  */
 
 extern int  errno;
-

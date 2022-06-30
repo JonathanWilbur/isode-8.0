@@ -27,7 +27,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/acsap/RCS/dased.c,v 9.0 1992/06
 
 #include <signal.h>
 #include <stdio.h>
-#include <varargs.h>
+#include <stdarg.h>
 #include "manifest.h"
 #include "sys.file.h"
 
@@ -45,6 +45,23 @@ static char *rcsid = "$Header: /xtel/isode/isode/acsap/RCS/dased.c,v 9.0 1992/06
 #ifdef	DEBUG
 #define	STATS
 #endif
+
+static dased (int vecp, char **vec);
+static dase_aux (struct type_DASE_Query__REQ *req);
+static DNS dase_interact (DNS dns, DN dn, char *s);
+static int dns_compar (struct dn_seq **a, struct dn_seq **b);
+static DNS just_say_no (DNS dns, DN dn, char *s);
+static PE name2psap (DN dn);
+static arginit (char **vec);
+
+static void adios (char *what, ...);
+static void advise (int code, ...);
+static void ts_adios (struct TSAPdisconnect *td, char *event);
+static void ts_advise (struct TSAPdisconnect *td, int code, char *event);
+
+static bind_to_dsa ();
+static int make_bind_args (struct ds_bind_arg *ba, struct ds_bind_arg *br, struct ds_bind_error *be);
+static envinit ();
 
 /*  */
 
@@ -77,8 +94,6 @@ static	PS	nps;
 int	dns_compar ();
 DNS	dase_interact (), just_say_no ();
 PE	name2psap ();
-
-void	adios (), advise (), ts_adios (), ts_advise ();
 
 
 char   *dn2str ();
@@ -459,7 +474,7 @@ send_rsp:
 /*  */
 
 static
-bind_to_dsa  {
+bind_to_dsa () {
 	struct ds_bind_arg ba;
 	struct ds_bind_arg br;
 	struct ds_bind_error be;
@@ -846,7 +861,7 @@ arginit (char **vec) {
 /*  */
 
 static
-envinit  {
+envinit () {
 	int     i,
 	sd;
 
@@ -911,13 +926,12 @@ envinit  {
 /*    ERRORS */
 
 #ifndef lint
-static void    adios (va_alist)
-va_dcl {
+static void    adios (char *what, ...) {
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, what);
 
-	_ll_log (pgm_log, LLOG_FATAL, ap);
+	_ll_log (pgm_log, LLOG_FATAL, what, ap);
 
 	va_end (ap);
 
@@ -934,16 +948,15 @@ adios (char *what, char *fmt) {
 
 
 #ifndef lint
-static void    advise (va_alist)
-va_dcl {
-	int     code;
+static void    advise (int code, ...) {
+	char *what;
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, code);
 
-	code = va_arg (ap, int);
+	what = va_arg (ap, char *);
 
-	_ll_log (pgm_log, code, ap);
+	_ll_log (pgm_log, code, what, ap);
 
 	va_end (ap);
 }

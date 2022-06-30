@@ -140,7 +140,7 @@ BEGIN {
 	lastcn=0
 	conns_open["dummy"] = ""
 	locadd["dummy"] = 0
-        while (getline > 0)
+        while (isode_getline > 0)
         {
 		if (substr($0, 1, 1) == "#")
 			break
@@ -334,9 +334,9 @@ BEGIN {
 	ua[1] = ""
 	ua[2] = ""
 	techies["dummy"] = 0
-	getline
+	isode_getline
 	localorg = $0
-        while (getline > 0)
+        while (isode_getline > 0)
         {
 		if (substr($0, 1, 1) == "#")
 			break
@@ -675,7 +675,7 @@ BEGIN {
 	if (gotdspbind == "TRUE")
 	{
 		# get the originator
-		getline
+		isode_getline
 		n = index($0, ":")
 		origname = substr($0, n+3)
 		if (origname == username)

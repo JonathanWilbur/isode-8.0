@@ -77,7 +77,7 @@ $(SBINDIR)iso.rtf:	xrtfd
 
 rtfd:		xrtfd
 		rm -f rtfd
-		ln xrtfd rtfd
+		cp xrtfd rtfd
 
 xrtfd:		rtfd.o rtfsbr.o RTF_tables.o
 		$(LDCC) $(LDFLAGS)  -o $@ rtfd.o rtfsbr.o RTF_tables.o \
@@ -105,7 +105,7 @@ $(BINDIR)rtf:	xrtf
 
 rtf:		xrtf
 		rm -f rtf
-		ln xrtf rtf
+		cp xrtf rtf
 
 xrtf:		rtf.o rtfsbr.o RTF_tables.o
 		$(LDCC) $(LDFLAGS) -o $@ rtf.o rtfsbr.o RTF_tables.o \

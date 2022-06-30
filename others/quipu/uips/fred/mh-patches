@@ -226,7 +226,7 @@ diff -c zotnet/mts/client.c.orig	zotnet/mts/client.c
 + 
 +     (void) signal (SIGPIPE, SIG_IGN);
 + 
-+     switch (getline (das_response, sizeof das_response, das_input)) {
++     switch (isode_getline (das_response, sizeof das_response, das_input)) {
 + 	case OK: 
 + 	    if (*das_response == '+') {
 + 		int     a[5];
@@ -307,7 +307,7 @@ diff -c zotnet/mts/client.c.orig	zotnet/mts/client.c
 + 	char	c,
 + 		input[BUFSIZ];
 + 
-+ 	if (getline (input, sizeof input, in) != OK)
++ 	if (isode_getline (input, sizeof input, in) != OK)
 + 	    goto real_losing;
 + 
 + 	switch (c = input[0]) {
@@ -373,7 +373,7 @@ diff -c zotnet/mts/client.c.orig	zotnet/mts/client.c
 + 
 + /*  */
 + 
-+ static int  getline (s, n, iop)
++ static int  isode_getline (s, n, iop)
 + char   *s;
 + int     n;
 + FILE * iop;

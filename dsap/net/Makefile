@@ -80,8 +80,8 @@ libnet.a:       netvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			netvrsn.o
 		-@rm -f $(UPDIR)libnet.a $(UPDIR)llib-lnet
-		-@$(LN) libnet.a $(UPDIR)libnet.a
-		-@$(LN) llib-lnet $(UPDIR)llib-lnet
+		-cp libnet.a $(UPDIR)libnet.a
+		-cp llib-lnet $(UPDIR)llib-lnet
 		-@ls -l $@
 		-@echo "QUIPU NET library built normally"
 

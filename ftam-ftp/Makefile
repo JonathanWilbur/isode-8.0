@@ -89,6 +89,7 @@ ftamd-ftp:	xftamd-ftp
 xftamd-ftp:	$(OFILES) $(DOCS-O) ftp.o ftp_lib.o $(DLIBES)
 		$(LDCC) $(LDFLAGS) -o $@ $(OFILES) $(DOCS-O) ftp.o ftp_lib.o \
 			$(LIBES) $(LSOCKET)
+		-@echo "XFTAMD-FTP library built normally"
 
 l-ftamd-ftp:;	$(LINT) $(LFLAGS) -DBRIDGE -I$(FTAM) $(CFILES) ftp.c \
 			$(DOCS-C) ftp_lib.c $(LLIBS) \
@@ -113,8 +114,8 @@ ftamd-trans.o:	$(HFILES) $(HDIR)usr.dirent.h $(HDIR)sys.dirent.h \
 ftamsbr.o:	$(HFILES) $(FTAM)ftamsbr.c
 		$(CC) $(CFLAGS) -DBRIDGE -I$(FTAM) -c $(FTAM)ftamsbr.c
 
-ftp.o:		ftp_var.h
-ftp_lib.o:	ftp_var.h
+ftp.o:		ftp.c
+ftp_lib.o:	ftp_lib.c
 
 
 ##################################################################
@@ -134,7 +135,7 @@ manuals:;	@$(UTILDIR)inst-man.sh $(MANOPTS) $(MANUALS)
 clean:;		rm -f *.o x* z* _* core
 
 grind:;		iprint Makefile
-		tgrind -lc ftp_var.h ftp.c ftp_lib.c
+		tgrind -lc ftp.h ftp.c ftp_lib.h ftp_lib.c
 		@echo $(MANUALS) | \
 			tr " " "\012" | \
 			sed -e "s%.*%itroff -man &%" | \

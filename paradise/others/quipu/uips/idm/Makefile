@@ -50,7 +50,7 @@ $(ETCDIR)idm/dmtailor: dmtailor
 		    then exit 0; \
 		    else cp dmtailor $@; ls -gls $@; \
 		fi
-		if ln $(ETCDIR)idm/dmtailor $(ETCDIR)idm/dmtailor.old; \
+		if cp $(ETCDIR)idm/dmtailor $(ETCDIR)idm/dmtailor.old; \
 		    then rm -f $@ ; cp dmtailor $@; ls -gls $@; \
 		    else exit 0; \
 		fi
@@ -72,4 +72,3 @@ true:;
 #depend:;	makedepend $(CFILES)
 
 # DO NOT DELETE THIS LINE -- make depend depends on it.
-

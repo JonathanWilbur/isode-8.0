@@ -62,7 +62,7 @@ extern char	*setfield();
 static int cons_type = 0;
 /* int     explicit; */
 
-s_table *save_ptr;
+s_table *save_ptr_e;
 
 extern YT gen_etag();
 
@@ -423,7 +423,7 @@ do_obj:
 		p1 = NULL;
 		/* support for -h flag */
 		cons_type++;
-		save_ptr = en_ptr;
+		save_ptr_e = en_ptr;
 		if (yp->yp_varexp == NULL && type != NULL)
 			ferr(1, "tenc_typ:YP_SEQLIST:NULL varexp pointer\n");
 		prcte(fp, type, t, f, yp, "SEQ_START");
@@ -456,7 +456,7 @@ do_obj:
 		}
 		fprintf(fp, "\t{ PE_END, 0, 0, 0, %s },\n",
 				genstrform (yp));
-		en_ptr = save_ptr;
+		en_ptr = save_ptr_e;
 		cons_type--;
 		break;
 
@@ -493,14 +493,14 @@ do_obj:
 			tenc_loop(fp, y, id, yp->yp_structname);
 		}
 		fprintf(fp, "\t{ PE_END, 0, 0, 0, %s },\n", genstrform(yp));
-		en_ptr = save_ptr;
+		en_ptr = save_ptr_e;
 		cons_type--;
 		break;
 
 	case YP_SEQTYPE:
 		p1 = NULL;
 		cons_type++;
-		save_ptr = en_ptr;
+		save_ptr_e = en_ptr;
 		prcte(fp, type, t, f, yp, "SEQOF_START");
 		if (y = yp->yp_type) {
 			char *t1;
@@ -538,14 +538,14 @@ do_obj:
 		else
 			fprintf(fp, "\t{ PE_END, 0, 0, 0, %s },\n",
 					genstrform(yp));
-		en_ptr = save_ptr;
+		en_ptr = save_ptr_e;
 		cons_type--;
 		break;
 
 	case YP_SETTYPE:
 		p1 = NULL;
 		cons_type++;
-		save_ptr = en_ptr;
+		save_ptr_e = en_ptr;
 		prcte(fp, type, t, f, yp, "SETOF_START");
 
 		if (y = yp->yp_type) {
@@ -584,7 +584,7 @@ do_obj:
 		else
 			fprintf(fp, "\t{ PE_END, 0, 0, 0, %s },\n",
 					genstrform(yp));
-		en_ptr = save_ptr;
+		en_ptr = save_ptr_e;
 		cons_type--;
 		break;
 
@@ -596,7 +596,7 @@ do_obj:
 			break;
 		}
 		cons_type++;
-		save_ptr = en_ptr;
+		save_ptr_e = en_ptr;
 		if (type == NULL || (type && noindirect(f)))
 			prstfield(fp, "CHOICE_START", t, f, NULLCP, c_class(yp), yp);
 		else
@@ -643,7 +643,7 @@ do_obj:
 		}
 		fprintf(fp, "\t{ PE_END, 0, 0, 0, %s },\n",
 				genstrform(yp));
-		en_ptr = save_ptr;
+		en_ptr = save_ptr_e;
 		cons_type--;
 		break;
 

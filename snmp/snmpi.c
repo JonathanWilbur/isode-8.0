@@ -33,7 +33,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/snmpi.c,v 9.0 1992/06/
 #include <setjmp.h>
 #include <signal.h>
 #include <stdio.h>
-#include <varargs.h>
+#include <stdarg.h>
 #include "SNMP-types.h"
 #include "objects.h"
 #ifndef SVR4_UCB
@@ -74,8 +74,6 @@ static	int	interrupted;
 
 static	SFP	istat;
 
-SFD	intrser ();
-
 
 static	char   *defs = NULLCP;
 
@@ -86,10 +84,8 @@ static	int	sd;
 static	struct TSAPaddr  snmp_ta;
 
 char   *snmp_error ();
-struct type_SNMP_Message *new_message ();
 
 
-void	adios (), advise ();
 
 /*  */
 
@@ -99,16 +95,26 @@ struct dispatch {
 
 	char   *ds_help;		/* help string */
 };
-struct dispatch *getds ();
+static struct dispatch *getds ();
 
 
-int	f_audit ();
+static int	f_audit ();
 #ifdef	BSD42
-int	f_bulk ();
+static int	f_bulk ();
 #endif
-int	f_compile (), f_dump ();
-int	f_get (), f_get_next (), f_set ();
-int	f_help (), f_quit (), f_status ();
+static int	f_compile (), f_dump ();
+static int	f_get (), f_get_next (), f_set ();
+static int	f_help (), f_quit (), f_status ();
+
+static int  snmploop (char  **vec, int	error);
+static	arginit (char    **vec);
+static int  isode_getline (char   *prompt, char *buffer);
+static	SFD intrser (int	sig);
+static int  ncols (FILE *fp);
+static struct type_SNMP_Message *new_message (int	offset, char  **vec);
+static int  get_ava (struct type_SNMP_VarBind *v, char   *ava, int	offset);
+static int  process (struct type_SNMP_Message *msg);
+
 
 static struct dispatch dispatches[] = {
 	"audit", f_audit, "audit traps",
@@ -179,7 +185,7 @@ char  **argv,
 
 	eof = 0;
 	for (interrupted = 0;; interrupted = 0) {
-		if (getline ("%s> ", buffer) == NOTOK) {
+		if (isode_getline ("%s> ", buffer) == NOTOK) {
 			if (eof)
 				break;
 
@@ -1777,7 +1783,7 @@ cots:
 
 /*    INTERACTIVE */
 
-static int  getline (prompt, buffer)
+static int  isode_getline (prompt, buffer)
 char   *prompt,
 	   *buffer;
 {
@@ -1877,16 +1883,15 @@ FILE *fp;
 /*    ERRORS */
 
 #ifndef	lint
-void	_advise ();
+static void	_advise (char* what, va_list ap);
 
 
-void	adios (va_alist)
-va_dcl {
+void	adios (char *what, ...) {
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, what);
 
-	_advise (ap);
+	_advise (what, ap);
 
 	va_end (ap);
 
@@ -1905,21 +1910,18 @@ char   *what,
 
 
 #ifndef	lint
-void	advise (va_alist)
-va_dcl {
+void	advise (char *what, ...) {
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, what);
 
-	_advise (ap);
+	_advise (what, ap);
 
 	va_end (ap);
 }
 
 
-static void  _advise (ap)
-va_list	ap;
-{
+static void  _advise (char* what, va_list ap) {
 	char    buffer[BUFSIZ];
 
 	asprintf (buffer, ap);

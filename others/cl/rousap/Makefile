@@ -97,8 +97,8 @@ librousap.a:	rousapvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			rousapvrsn.o
 		-@rm -f $(TOPDIR)librousap.a $(TOPDIR)llib-lrousap
-		-@ln librousap.a $(TOPDIR)librousap.a
-		-@ln llib-lrousap $(TOPDIR)llib-lrousap
+		-@cp librousap.a $(TOPDIR)librousap.a
+		-@cp llib-lrousap $(TOPDIR)llib-lrousap
 		-@ls -l $@
 		-@echo "RoSAP library built normally"
 

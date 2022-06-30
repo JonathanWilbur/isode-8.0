@@ -63,7 +63,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/ftp-ftam/RCS/ftpd.c,v 9.0 1992/
 #include "manifest.h"
 #include "logger.h"
 extern LLog _ftam_log, *ftam_log;
-#include <varargs.h>
+#include <stdarg.h>
 
 char *ctime();
 void adios (), advise ();
@@ -78,7 +78,7 @@ void adios (), advise ();
  */
 #define	FTPUSERS	"/usr/etc/ftpusers"
 
-extern	char *sys_errlist[];
+char *sys_errlist[];
 extern  char ftam_error[];
 extern	char version[];
 
@@ -326,39 +326,7 @@ char *s;
 }
 
 #ifndef	lint
-reply(va_alist)
-va_dcl {
-	int	n;
-	va_list ap;
-
-	va_start (ap);
-
-	n = va_arg (ap, int);
-
-	_reply (n, ' ', ap);
-
-	va_end (ap);
-}
-
-lreply(va_alist)
-va_dcl {
-	int	n;
-	va_list ap;
-
-	va_start (ap);
-
-	n = va_arg (ap, int);
-
-	_reply (n, '-', ap);
-
-	va_end (ap);
-}
-
-static _reply (n, c, ap)
-int	n;
-char    c;
-va_list ap;
-{
+static _reply (int n, char c, va_list ap) {
 	char    buffer[BUFSIZ];
 
 	_asprintf (buffer, NULLCP, ap);
@@ -368,6 +336,32 @@ va_list ap;
 
 	if (verbose)
 		advise (NULLCP,"<--- %d%c%s", n, c, buffer);
+}
+
+void reply(int code, ...) {
+	int	n;
+	va_list ap;
+
+	va_start (ap, code);
+
+	n = va_arg (ap, int);
+
+	_reply (n, ' ', ap);
+
+	va_end (ap);
+}
+
+void lreply(int code, ...) {
+	int	n;
+	va_list ap;
+
+	va_start (ap, code);
+
+	n = va_arg (ap, int);
+
+	_reply (n, '-', ap);
+
+	va_end (ap);
 }
 #else
 /* VARARGS2 */
@@ -635,4 +629,3 @@ char *name;
 	fclose(fd);
 	return (!found);
 }
-

@@ -48,11 +48,11 @@ LLIBS   =	$(TOPDIR)llib-lisode
 MIB-C	=	$(AE-C) smux-g.c \
 			system.c interfaces.c routes.c ip.c icmp.c tcp.c \
 			udp.c clns.c 
-AE-C	=	mib.c snmp-g.c view-g.c eval.c
+AE-C	=	std-legacy/nlist.c mib.c snmp-g.c view-g.c eval.c
 MIB-O	=	$(AE-O) smux-g.o \
 			system.o interfaces.o routes.o ip.o icmp.o tcp.o \
 			udp.o clns.o
-AE-O	=	mib.o snmp-g.o view-g.o eval.o
+AE-O	=	nlist.o mib.o snmp-g.o view-g.o eval.o
 CFILES	=	snmpd.c \
 			unixd.c users.c print.c unixFs.c \
 			snmpi.c objects.c syntax.c values.c \
@@ -60,6 +60,8 @@ CFILES	=	snmpd.c \
 PYFILES	=	snmp.py
 HFILES	=	$(HDIR)psap.h $(HDIR)manifest.h $(HDIR)general.h \
 		$(HDIR)config.h
+
+LSOCKET = -lm -lcrypt
 
 
 ##################################################################
@@ -88,6 +90,7 @@ $(SBINDIR)snmpd: xsnmpd
 		-@echo ""
 
 snmpd:		xsnmpd
+		-@echo "XSMPD built normally"
 
 xsnmpd:		snmpd.o $(MIB-O) $(LIBD)
 		$(LDCC) $(LDFLAGS) -o $@ snmpd.o $(MIB-O) $(LIBES) \
@@ -116,6 +119,8 @@ clns.o:		interfaces.h $(HDIR)internet.h clns.h routes.h
 snmp-g.o:	snmp-g.h
 view-g.o:	view-g.h $(HDIR)isoaddrs.h $(HDIR)internet.h
 smux-g.o:	smux-g.h $(HDIR)internet.h
+nlist.o:	std-legacy/nlist.c std-legacy/nlist.h
+		$(CC) $(CFLAGS) -c $< -o $@
 
 
 ##################################################################
@@ -132,6 +137,7 @@ $(SBINDIR)snmpc: xsnmpc
 		-@echo ""
 
 snmpc:		xsnmpc
+		-@echo "XSMPC built normally"
 
 xsnmpc:		snmpc.o $(AE-O) $(LIBD)
 		$(LDCC) $(LDFLAGS) -o $@ snmpc.o $(AE-O) $(LIBES) \
@@ -164,6 +170,7 @@ $(SBINDIR)snmpt: xsnmpt
 		-@echo ""
 
 snmpt:		xsnmpt
+		-@echo "XSNMPT built normally"
 
 xsnmpt:		snmpt.o $(LIBD)
 		$(LDCC) $(LDFLAGS) -o $@ snmpt.o $(LIBES) $(LSOCKET)
@@ -197,6 +204,7 @@ it:		xunixd
 		xunixd
 
 unixd:		xunixd
+		-@echo "XUNIXD built normally"
 
 xunixd:		unixd.o users.o print.o printcap.o unixFs.o $(LIBD)
 		$(LDCC) $(LDFLAGS) -o $@ unixd.o users.o print.o printcap.o \
@@ -231,6 +239,7 @@ $(BINDIR)snmpi:	xsnmpi
 		-@echo ""
 
 snmpi:		xsnmpi
+		-@echo "XSNMPI built normally"
 
 xsnmpi:		snmpi.o snmpb.o $(LIBD)
 		$(LDCC) $(LDFLAGS) -o $@ snmpi.o snmpb.o $(LIBES) $(LSOCKET)
@@ -324,7 +333,7 @@ values.o:	objects.h SNMP-types.h $(HDIR)logger.h
 smux.o:		smux.h SNMP-types.h $(HDIR)tailor.h $(HDIR)logger.h \
 		$(HDIR)internet.h
 smuxentry.o:	smux.h SNMP-types.h $(HDIR)tailor.h
-loadobjects.o:	objects.h
+loadobjects.o:	objects.h loadobjects.c
 
 
 ##################################################################
@@ -338,7 +347,7 @@ $(ETCDIR)snmpd.rc:	snmpd.rc
 		    then exit 0; \
 		    else cp snmpd.rc $@; ls -gls $@; \
 		fi
-		if ln $@ $@.old; \
+		if cp $@ $@.old; \
 		    then rm -f $@; cp snmpd.rc $@; ls -gls $@; \
 		    else exit 0; \
 		fi
@@ -396,6 +405,7 @@ $(INCDIR)snmp/$(TARGET2):	$(TARGET2)
 		-@echo ""
 
 objects:	$(DEFS)
+		-@echo "objects built normally"
 
 objects.defs:	$(DEFS2)
 		cat $(DEFS2) > $@

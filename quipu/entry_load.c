@@ -48,6 +48,8 @@ static PS ps;
 
 #define EDBLEN	3	/* length of string "EDB" */
 
+static entry_load_kids ( Avlnode *entryptr, int offset );
+
 int
 fileexists (char *fname) {
 	struct stat buf;
@@ -85,7 +87,7 @@ read_mapped_rdn (PS aps, char *name, char *file) {
 #ifdef	TURBO_DISK
 	char *ptr, *newname, *tmp, *fgetline();
 #else	/* TURBO_DISK */
-	char *ptr, *newname, *tmp, *getline();
+	char *ptr, *newname, *tmp, *isode_getline();
 #endif	/* TURBO_DISK */
 	extern int parse_line;
 	int i;
@@ -99,7 +101,7 @@ read_mapped_rdn (PS aps, char *name, char *file) {
 #ifdef	TURBO_DISK
 	while ( (ptr = fgetline(mapfp)) != NULLCP)
 #else	/* TURBO_DISK */
-	while ( (ptr = getline(mapfp)) != NULLCP)
+	while ( (ptr = isode_getline(mapfp)) != NULLCP)
 #endif	/* TURBO_DISK */
 	{
 		if ((newname = rindex(ptr,'#')) == NULLCP) {
@@ -383,8 +385,6 @@ static char got_all = TRUE;
 
 static
 load_a_kid (Entry e, int offset) {
-	static int      entry_load_kids();
-
 	if ((!e->e_external) &&
 			(e->e_master == NULLAV) &&
 			(e->e_slave == NULLAV)) {

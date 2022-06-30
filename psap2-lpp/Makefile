@@ -90,7 +90,7 @@ libpsap2-lpp.a:	psap2vrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			PS_tables.o psap2vrsn.o
 		-@rm -f $(TOPDIR)libpsap2-lpp.a
-		-@$(LN) libpsap2-lpp.a $(TOPDIR)libpsap2-lpp.a
+		-cp libpsap2-lpp.a $(TOPDIR)libpsap2-lpp.a
 		-@ls -l $@
 		-@echo "PSAP2 (lightweight) library built normally"
 
@@ -183,7 +183,7 @@ libisode-lpp.a:	isodevrsn.o
 		-rm -f $@ $(TOPDIR)libisode-lpp.a
 		-rm -rf tmp
 		-mkdir tmp
-		ln isodevrsn.o tmp
+		cp isodevrsn.o tmp
 		for i in $(LIBES); do (cd tmp; ar x ../$$i; rm -f acsapstub.o acsapdse.o; \
 		    rm -f __* ; \
 		    ../$(UTILDIR)make-lib.sh -quick $(SYSTEM) $(ARFLAGS) ../$@ *; \
@@ -191,7 +191,7 @@ libisode-lpp.a:	isodevrsn.o
 		$(UTILDIR)make-lib.sh $(SYSTEM) $@ -ranlib
 		-rm -rf tmp
 		-@rm -f $(TOPDIR)libisode-lpp.a
-		-@$(LN) $@ $(TOPDIR)libisode-lpp.a
+		-cp $@ $(TOPDIR)libisode-lpp.a
 		-@ls -l $@
 		-@echo "LPP library built normally"
 
@@ -200,7 +200,7 @@ llib-lisode-lpp:	$(LLLIBS)
 		-@echo '' >> $@
 		cat $(LLLIBS) > $@
 		-@rm -f $(TOPDIR)llib-lisode-lpp
-		-@$(LN) llib-lisode-lpp $(TOPDIR)llib-lisode-lpp
+		-cp llib-lisode-lpp $(TOPDIR)llib-lisode-lpp
 
 
 isodevrsn.o:	$(LIBES)

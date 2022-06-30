@@ -38,6 +38,8 @@ static char *rcsid = "$Header: /xtel/isode/isode/psap2-lpp/RCS/psaprelease2.c,v 
 
 /*    P-RELEASE.RESPONSE */
 
+static int  PRelResponseAux (struct psapblk *pb, PE	data, struct PSAPindication *pi);
+
 int	PRelResponse (sd, status, data, ndata, pi)
 int	sd;
 int	status;

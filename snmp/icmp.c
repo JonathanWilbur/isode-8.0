@@ -37,10 +37,10 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/icmp.c,v 9.0 1992/06/1
 #ifdef	BSD44
 #include <sys/param.h>
 #endif
-#include <netinet/in_systm.h>
-#include <netinet/ip.h>
-#include <netinet/ip_icmp.h>
-#include <netinet/icmp_var.h>
+#include "std-legacy/netinet/in_systm.h"
+#include "std-legacy/netinet/ip.h"
+#include "std-legacy/netinet/ip_icmp.h"
+#include "std-legacy/netinet/icmp_var.h"
 
 /*  */
 

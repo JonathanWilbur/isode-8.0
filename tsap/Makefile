@@ -87,8 +87,8 @@ libtsap.a:	tsapvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			tsapvrsn.o
 		-@rm -f $(TOPDIR)libtsap.a $(TOPDIR)llib-ltsap
-		-@$(LN) libtsap.a $(TOPDIR)libtsap.a
-		-@$(LN) llib-ltsap $(TOPDIR)llib-ltsap
+		-cp libtsap.a $(TOPDIR)libtsap.a
+		-cp llib-ltsap $(TOPDIR)llib-ltsap
 		-@ls -l $@
 		-@echo "TSAP library built normally"
 

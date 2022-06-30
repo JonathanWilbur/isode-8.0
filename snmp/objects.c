@@ -34,6 +34,13 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/objects.c,v 9.0 1992/0
 #include <stdio.h>
 #include "objects.h"
 #include "tailor.h"
+#include <errno.h>
+
+static int  read_name (char   *name, char *value, char *hash);
+static int  read_type (char  **vec);
+static int  add_objects_aux ();
+static OID  resolve (char   *id, OT	ot);
+static	dump_object (OT	ot, int	i);
 
 /*    DATA */
 
@@ -54,8 +61,6 @@ OT	chain;
 
 OID	resolve ();
 
-
-extern	int	errno;
 
 /*    OBJECTS */
 

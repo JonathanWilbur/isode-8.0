@@ -39,6 +39,9 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/syntax.c,v 9.0 1992/06
 #include "internet.h"
 #include "clns.h"
 
+// #include <bits/socket.h>
+#include "std-legacy/net/socket.h"
+
 /*    DATA */
 
 #define	MAXSYN	50

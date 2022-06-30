@@ -29,8 +29,10 @@
 #ifdef	BSD44
 #include <sys/param.h>
 #endif
-#include <sys/mbuf.h>
-#include <net/route.h>
+#include "std-legacy/sys/mbuf.h"
+
+#include "std-legacy/net/route.h"
+#include "std-legacy/linux/route.h"
 
 /*  */
 

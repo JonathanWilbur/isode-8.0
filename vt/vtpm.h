@@ -236,9 +236,9 @@
 
 #define PEPYPARM int *
 
-PE	pre, pwe;
+extern PE	pre, pwe;
 PE	mkdeliver();
-int	fd,
+extern int	fd,
 	readfds,
 	writefds,
 	exfds,
@@ -246,11 +246,11 @@ int	fd,
 	connected,
 	netfile;
 
-char	*dprofile, *cprofile;
+extern char	*dprofile, *cprofile;
 #ifndef SVR4
 char	*ttyname();
 #endif
-char	*myname;
+extern char	*myname;
 extern PE	p_ondq;
 extern LLog _vt_log, *vt_log;
 
@@ -258,7 +258,7 @@ extern LLog _vt_log, *vt_log;
 extern int errno;
 extern unsigned	state, sector;
 
-int		vns,
+extern int		vns,
 		allpmde, /* all draft VTE parameters defined */
 		allpmdu, /* all draft VTE parameters defined or undefined */
 		cnw,	 /* collision winner right assigned to this VTPM  */
@@ -352,10 +352,12 @@ extern struct PSAPindication pi;
 extern struct PSAPdata	px;
 extern struct PSAPfinish *pf;
 
+static void acs_advise (struct AcSAPabort *aa, char *event);
+static void ps_adios (struct PSAPabort *pab, char *event);
+static void ps_advise (struct PSAPabort *pab, char *event);
+
 void	finalbye ();
-void	adios (), advise ();
 void	acs_adios (), acs_advise ();
 void	ps_adios (), ps_advise ();
 
-int connected;	/*TEMP -- for sector 1 testing only -- will be supplied by VTP*/
-
+extern int connected;	/*TEMP -- for sector 1 testing only -- will be supplied by VTP*/

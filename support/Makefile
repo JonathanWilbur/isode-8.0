@@ -84,7 +84,7 @@ $(SBINDIR)tsapd:	xtsapd
 
 tsapd:		xtsapd
 		rm -f tsapd
-		ln xtsapd tsapd
+		cp xtsapd tsapd
 
 xtsapd:		tsapd.o $(TOPDIR)libisode.a
 		$(LDCC) $(LDFLAGS) -o $@ tsapd.o $(LIBISODE) $(LSOCKET)
@@ -106,7 +106,7 @@ $(SBINDIR)iaed:	xiaed
 
 iaed:		xiaed
 		rm -f iaed
-		ln xiaed iaed
+		cp xiaed iaed
 
 xiaed:		iaed.o $(TOPDIR)libdsap.a $(TOPDIR)libisode.a
 		$(LDCC) $(LDFLAGS) -o $@ iaed.o \
@@ -120,7 +120,7 @@ iaed.o:		$(HFILES) $(HDIR)x25.h $(HDIR)logger.h $(HDIR)tailor.h \
 				$(HDIR)quipu/ds_error.h $(HDIR)quipu/dap.h \
 			$(HDIR)quipu/ds_search.h tsapd.c
 		-@rm -f iaed.c
-		ln tsapd.c iaed.c
+		cp tsapd.c iaed.c
 		$(CC) $(CFLAGS) -DIAE -c iaed.c
 		-@rm -f iaed.c
 
@@ -145,7 +145,7 @@ $(SBINDIR)isore:	xisore
 
 isore:		xisore
 		rm -f isore
-		ln xisore isore
+		cp xisore isore
 
 xisore:		isore.o
 		$(LDCC) $(LDFLAGS) -o $@ isore.o $(TOPDIR)libcompat.a \
@@ -170,17 +170,17 @@ $(SBINDIR)isod.tsap:	xisod
 			$(SBINDIR)isod.rtsap \
 			$(SBINDIR)isod.rosap
 		cp xisod $@
-		-ln $@  $(SBINDIR)isod.ssap
-		-ln $@  $(SBINDIR)isod.psap
-		-ln $@  $(SBINDIR)isod.acsap
-		-ln $@  $(SBINDIR)isod.rtsap
-		-ln $@  $(SBINDIR)isod.rosap
+		-cp $@  $(SBINDIR)isod.ssap
+		-cp $@  $(SBINDIR)isod.psap
+		-cp $@  $(SBINDIR)isod.acsap
+		-cp $@  $(SBINDIR)isod.rtsap
+		-cp $@  $(SBINDIR)isod.rosap
 		-@ls -gls $@
 		-@echo ""
 
 isod:		xisod
 		rm -f isod
-		ln xisod isod
+		cp xisod isod
 
 xisod:		isod.o $(TOPDIR)libisode.a
 		$(LDCC) $(LDFLAGS) -o $@ isod.o $(LIBISODE) $(LSOCKET)
@@ -206,7 +206,7 @@ $(BINDIR)isoc:	xisoc
 
 isoc:		xisoc
 		rm -f isoc
-		ln xisoc isoc
+		cp xisoc isoc
 
 xisoc:		isoc.o $(TOPDIR)libisode.a
 		$(LDCC) $(LDFLAGS) -o $@ isoc.o $(LIBISODE) $(LSOCKET)
@@ -254,7 +254,7 @@ libisode.a:	isodevrsn.o
 		-rm -f $@ $(TOPDIR)libisode.a
 		-rm -rf tmp
 		-mkdir tmp
-		ln isodevrsn.o tmp
+		cp isodevrsn.o tmp
 		for i in $(LIBES); do (cd tmp; ar x ../$$i; \
 		    rm -f __* ; \
 		    ../$(UTILDIR)make-lib.sh -quick $(SYSTEM) $(ARFLAGS) ../$@ *; \
@@ -262,7 +262,7 @@ libisode.a:	isodevrsn.o
 		$(UTILDIR)make-lib.sh $(SYSTEM) $@ -ranlib
 		-rm -rf tmp
 		-@rm -f $(TOPDIR)libisode.a
-		-@$(LN) $@ $(TOPDIR)libisode.a
+		-cp $@ $(TOPDIR)libisode.a
 		-@ls -l $@
 		-@echo "ISODE library built normally"
 
@@ -278,7 +278,7 @@ libisode-shared: isodevrsn.o
 		@for i in libisode.s[ao]* ;\
 		do \
 			rm -f $(TOPDIR)$$i; \
-			$(LN) $$i $(TOPDIR)$$i; \
+			cp $$i $(TOPDIR)$$i; \
 			ls -l $$i; \
 		done
 		@echo "shared ISODE library built normally"
@@ -290,7 +290,7 @@ llib-lisode:	$(LLIBS)
 		-@echo '' >> $@
 		cat $(LLIBS) >> $@
 		-@rm -f $(TOPDIR)llib-lisode
-		-@$(LN) llib-lisode $(TOPDIR)llib-lisode
+		-cp llib-lisode $(TOPDIR)llib-lisode
 
 isodevrsn.c:	$(LIBES)
 		@$(UTILDIR)version.sh isode > $@
@@ -396,7 +396,7 @@ $(SBINDIR)lppd:	xlppd
 
 lppd:		xlppd
 		-rm -f lppd
-		-ln xlppd lppd
+		-cp xlppd lppd
 
 xlppd:		lppd.o $(LPP-LIBES)
 		$(LDCC) $(LDFLAGS) -o $@ lppd.o $(LPP-LIBES) $(LSOCKET)

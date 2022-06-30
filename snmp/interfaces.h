@@ -28,7 +28,9 @@
 
 #include "internet.h"
 #include <net/if.h>
-#include <netinet/if_ether.h>		/* to get struct arpcom */
+// #include "std-legacy/net/if.h"
+#include "std-legacy/net/if_ether.h"		/* to get struct arpcom */
+// #include "std-legacy/netinet/if_ether.h"		/* to get struct arpcom */
 #include "clns.h"
 
 /*  */

@@ -858,7 +858,7 @@ int	sig;
 long	code;
 struct sigcontext *sc;
 {
-	union wait status;
+	int status;
 
 	while (wait3 (&status, WNOHANG, (struct rusage *) NULL) > 0)
 		chldhit = 1;

@@ -20,6 +20,7 @@
  *
  */
 
+#include <stdint.h>
 
 #ifndef	_MANIFEST_
 #define	_MANIFEST_
@@ -180,7 +181,7 @@ typedef char *CP;
 #endif
 
 #ifndef INTDEF
-#define	INTDEF	long
+#define	INTDEF	int32_t
 #endif
 
 typedef INTDEF integer;
@@ -225,13 +226,15 @@ typedef unsigned long	u_long;
 
 
 #undef	IP
-typedef int	*IP;
+typedef ssize_t	*IP;
 #define	NULLIP		((IP) 0)
 
 
-typedef	int	(*IFP) ();
+typedef	ssize_t	(*IFP) ();
 #define	NULLIFP		((IFP) 0)
 
+typedef	void * (*PFP) ();
+#define	NULLPFP		((PFP) 0)
 
 typedef void   (*VFP) ();
 #define	NULLVFP		((VFP) 0)

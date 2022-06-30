@@ -178,6 +178,21 @@ static	int	dedrequests = 0;
 
 static	int	boundlimit = MAXBOUNDS;
 
+static OID  oid_median (OID	a, OID b);
+static OID  oid_copy (OID	a);
+
+static	push_requests (PS	ps, char   *community, int	onemore);
+static	free_bound (struct bound *b);
+static int  new_bound (char   *community, OID	start, OID stop);
+static	free_request (struct request *r);
+static int  bulk2_aux (PS	ps, int	sd, struct binding *bl,
+	struct type_SNMP_VarBindList *vb, char   *community);
+static int  next_thread (struct thread *t, PS	ps, int	next);
+static	free_thread (struct thread *t);
+static int  new_thread (PS	ps, struct type_SNMP_VarBindList *vb,
+	char   *community, OID	start, OID stop);
+static	print_bulk (struct binding *bl, struct type_SNMP_VarBindList *vb, int	partial);
+static int  wait_for_action (int	sd, PS	ps);
 
 /* MISCELLANEOUS INFORMATION */
 OID	oid_median (), oid_copy ();
@@ -1726,4 +1741,3 @@ OID	a;
 bulk_dummy () {}
 
 #endif
-

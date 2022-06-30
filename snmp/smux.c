@@ -33,7 +33,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/smux.c,v 9.0 1992/06/1
 /* LINTLIBRARY */
 
 #include <stdio.h>
-#include <varargs.h>
+#include <stdarg.h>
 #include "smux.h"
 #include "tailor.h"
 
@@ -41,6 +41,10 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/smux.c,v 9.0 1992/06/1
 #include <errno.h>
 #include "internet.h"
 #include "sys.file.h"
+
+static int  smuxalloc ();
+static int  smuxsend (struct type_SNMP_SMUX__PDUs *pdu);
+static int  smuxlose (int smux_errno, ...);
 
 /*    DATA */
 
@@ -528,13 +532,10 @@ struct type_SNMP_VarBindList *bindings;
 /*    LOSE */
 
 #ifndef	lint
-static int  smuxlose (va_alist)
-va_dcl {
+static int  smuxlose (int smux_errno, ...) {
 	va_list ap;
 
-	va_start (ap);
-
-	smux_errno = va_arg (ap, int);
+	va_start (ap, smux_errno);
 
 	asprintf (smux_info, ap);
 

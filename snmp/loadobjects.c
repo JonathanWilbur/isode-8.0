@@ -12139,8 +12139,8 @@ static object_type _types[] = {
 	NULL
 };
 
-OT	anchor = _types;
-OT	chain = &_types[1510];
+// OT	anchor = _types;
+// OT	chain = &_types[1510];
 
 static OT _Tbuckets[128] = {
 	&_types[270],

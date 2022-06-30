@@ -26,7 +26,8 @@
  */
 
 
-#include <nlist.h>
+// #include <nlist.h>
+#include "std-legacy/nlist.h"
 #ifdef	__NeXT__
 #define	n_name	n_un.n_name
 #endif
@@ -81,6 +82,3 @@ extern	struct timeval
 		my_boottime;
 
 extern	OID	nullSpecific;
-
-
-void	adios (), advise ();

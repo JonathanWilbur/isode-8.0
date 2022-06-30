@@ -34,6 +34,11 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/print.c,v 9.0 1992/06/
 #include "objects.h"
 #include "logger.h"
 
+static	free_pq ();
+static	free_pj ();
+static	upstat (struct pq *pq, char   *msg);
+static	startdaemon (struct pq *pq);
+static int  findaemon (struct pq *pq, char   *current);
 
 #define	generr(offset)	((offset) == type_SNMP_SMUX__PDUs_get__next__request \
 				    ? NOTOK : int_SNMP_error__status_genErr)
@@ -47,7 +52,9 @@ void	advise ();
 
 #include "pathnames.h"
 #include "sys.file.h"
-#include "usr.dirent.h"
+// #include "std-legacy/dirent.h"
+#include <dirent.h>
+// #include "usr.dirent.h"
 #include <sys/stat.h>
 
 
@@ -328,7 +335,7 @@ int	offset;
 
 		if (chdir (pq -> pq_SD) == NOTOK || !(dp = opendir (".")))
 			continue;
-		fstat (dp -> dd_fd, &pq -> pq_st);
+		fstat (dirfd(dp), &pq -> pq_st);
 		while (dd = readdir (dp)) {
 			int    j;
 			unsigned int *ip;
@@ -991,7 +998,7 @@ int	init_print () {
  */
 
 
-static int  select (dd)
+static int  _select (dd)
 struct dirent *dd;
 {
 	char    c = dd -> d_name[0];
@@ -1112,7 +1119,7 @@ integer	cor;
 				break;
 
 			case PQ_CLEAN:
-				if ((status = scandir (".", &queue, select, sortq))
+				if ((status = scandir (".", &queue, _select, sortq))
 						== NOTOK) {
 					advise (LLOG_EXCEPTIONS, NULLCP,
 							"unable to examine %s", pq -> pq_SD);

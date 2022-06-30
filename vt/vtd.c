@@ -33,6 +33,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/vt/RCS/vtd.c,v 9.0 1992/06/16 1
 #include "tailor.h"
 #include "general.h"
 #ifndef	SVR4_UCB
+#include "asm_ioctls.h"
 #include <sys/ioctl.h>
 #endif
 #ifdef	TERMIOS
@@ -58,7 +59,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/vt/RCS/vtd.c,v 9.0 1992/06/16 1
 #include <ctype.h>
 #include <setjmp.h>
 #include <pwd.h>
-#include <varargs.h>
+#include <stdarg.h>
 
 #define	BELL	'\07'
 #ifndef	SUNOS4
@@ -295,7 +296,7 @@ fatal (int f, char *msg) {
 int
 fatalperror (int f, char *msg, int errnum) {
 	char buf[BUFSIZ];
-	extern char *sys_errlist[];
+	char *sys_errlist[errnum];
 
 	sprintf(buf, "%s: %s", msg, sys_errlist[errnum]);
 	fatal(f, buf);
@@ -653,7 +654,7 @@ char	utmp[] = "/etc/utmp";
 long	lseek ();
 
 rmut() {
-	f;
+	int f;
 	int found = 0;
 
 	f = open(utmp, 2);
@@ -736,13 +737,12 @@ finalbye (void) {
 
 
 #ifndef	lint
-void	adios (va_alist)
-va_dcl {
+void	adios (char* what, ...) {
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, what);
 
-	_ll_log (vt_log, LLOG_FATAL, ap);
+	_ll_log (vt_log, LLOG_FATAL, what, ap);
 
 	va_end (ap);
 
@@ -761,16 +761,15 @@ adios (char *what, char *fmt) {
 
 
 #ifndef	lint
-void	advise (va_alist)
-va_dcl {
-	int	    code;
+void	advise (int code, ...) {
+	char* what;
 	va_list ap;
 
-	va_start (ap);
+	va_start (ap, code);
 
-	code = va_arg (ap, int);
+	what = va_arg (ap, char*);
 
-	_ll_log (vt_log, code, ap);
+	_ll_log (vt_log, code, what, ap);
 
 	va_end (ap);
 }

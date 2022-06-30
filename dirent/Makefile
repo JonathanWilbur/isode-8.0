@@ -69,8 +69,8 @@ libdirent.a:	direntvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			direntvrsn.o
 		-@rm -f $(TOPDIR)libdirent.a $(TOPDIR)llib-ldirent
-		-@$(LN) libdirent.a $(TOPDIR)libdirent.a
-		-@$(LN) llib-ldirent $(TOPDIR)llib-ldirent
+		-cp libdirent.a $(TOPDIR)libdirent.a
+		-cp llib-ldirent $(TOPDIR)llib-ldirent
 		-@ls -l $@
 		-@echo "DIRENT library built normally"
 

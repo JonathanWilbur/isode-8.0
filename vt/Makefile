@@ -74,6 +74,7 @@ $(SBINDIR)iso.vt:	xvtd
 		-@echo ""
 
 vtd:		xvtd
+		-@echo "XVTD library built normally"
 
 xvtd:		vtd.o $(OFILES) libvt.a $(LIBES)
 		$(LDCC) $(LDFLAGS) -o $@ vtd.o $(OFILES) libvt.a \
@@ -108,6 +109,7 @@ $(BINDIR)vt:	xvt
 		-@echo ""
 
 vt:		xvt
+		-@echo "XVT library built normally"
 
 xvt:		vt.o $(OFILES) libvt.a $(LIBES)
 		$(LDCC) $(LDFLAGS) -o $@ vt.o $(OFILES) libvt.a \

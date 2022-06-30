@@ -46,6 +46,12 @@ static int	viewmask = 0x1;
 static OID	localAgent = NULLOID;
 static OID	rfc1157Domain = NULLOID;
 
+static struct view *get_prent (unsigned int *ip, int	len, int	isnext);
+static struct community *get_acent (unsigned int *ip, int	len, int	isnext);
+static struct trap *get_trent (unsigned int *ip, int	len, int	isnext);
+static int  str2sa (char   *s, struct NSAPaddr *na, struct sockaddr *sock, int	proxy);
+
+
 struct view *get_prent ();
 
 

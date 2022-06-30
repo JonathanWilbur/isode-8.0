@@ -441,7 +441,7 @@ int	PConnResponse ();	/* P-CONNECT.RESPONSE */
 int	PAsynConnRequest ();	/* P-(ASYN-)CONNECT.REQUEST */
 int	PAsynRetryRequest ();	/* P-ASYN-RETRY.REQUEST (pseudo) */
 int	PDataRequest ();	/* P-DATA.REQUEST */
-int	PDataRequestAux ();	/* P-[*-]DATA.REQUEST */
+// int	PDataRequestAux ();	/* P-[*-]DATA.REQUEST */
 #define	PPDU_TTD	8
 #define	PPDU_TE		9
 #define	PPDU_TC	       10

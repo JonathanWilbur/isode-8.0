@@ -35,9 +35,10 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/ip.c,v 9.0 1992/06/16 
 #include "interfaces.h"
 #include "routes.h"
 
-#include <netinet/in_systm.h>
-#include <netinet/ip.h>
-#include <netinet/ip_var.h>
+#include "std-legacy/netinet/in_systm.h"
+#include "std-legacy/netinet/ip.h"
+#include "std-legacy/netinet/ip_var.h"
+
 #ifndef SVR4_UCB
 #include <sys/ioctl.h>
 #endif
@@ -49,6 +50,9 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/ip.c,v 9.0 1992/06/16 
 static int	ipforwarding;
 
 static struct ipstat ipstat;
+
+static int  get_arptab (int	offset);
+static	sort_arptab ();
 
 /*  */
 

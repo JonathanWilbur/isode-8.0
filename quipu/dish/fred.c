@@ -90,7 +90,7 @@ static AttributeType t_surname;
 static AttributeType t_title;
 
 
-Entry	fredentry ();
+static  Entry fredentry (DN	adn, char	islong);
 Attr_Sequence fred_as (), fred_full ();
 
 static struct dn_seq *interact ();
@@ -180,6 +180,9 @@ usage:
 
 static	int	dlevel = 0;
 static	int	dsa_status;
+
+static struct dn_seq *dm2dn_seq (char *dm);
+static struct dn_seq *dm2dn_seq_aux (char   *dm, DN	dn, struct dn_seq *dlist);
 
 struct dn_seq *dm2dn_seq ();
 struct dn_seq *dm2dn_seq_aux ();
@@ -379,10 +382,7 @@ dm2dn_seq (char *dm) {
 
 /*  */
 
-static struct dn_seq *dm2dn_seq_aux (dm, dn, dlist)
-char   *dm;
-DN	dn;
-struct dn_seq *dlist;
+static struct dn_seq *dm2dn_seq_aux (char   *dm, DN	dn, struct dn_seq *dlist)
 {
 	char   *dp;
 	struct ds_search_arg search_arg;
@@ -484,6 +484,9 @@ free_filter:
 }
 
 /*    EXPAND SUPPORT */
+
+static struct dn_seq *expand_full (DN	dn, int    *complete);
+static struct dn_seq *expand_partial (DN	dn, int    *complete);
 
 struct dn_seq	*expand_full (),
 		 *expand_partial ();

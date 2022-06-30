@@ -109,17 +109,17 @@ $(PEPSYDIR)$(TARGET):	$(TARGET)
 libftam:	libftam.a true
 		-@rm -f $(TOPDIR)h/CONT*.h $(TOPDIR)h/FADU*.h \
 			$(TOPDIR)h/FTAM*.h
-		-@$(LN) CONT-types.h $(TOPDIR)h/CONT-types.h
-		-@$(LN) FADU-types.h $(TOPDIR)h/FADU-types.h 
-		-@$(LN) FTAM-types.h $(TOPDIR)h/FTAM-types.h
+		-cp CONT-types.h $(TOPDIR)h/CONT-types.h
+		-cp FADU-types.h $(TOPDIR)h/FADU-types.h 
+		-cp FTAM-types.h $(TOPDIR)h/FTAM-types.h
 
 libftam.a:	ftamvrsn.o
 		-rm -f $@
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			CONT_tables.o FADU_tables.o FTAM_tables.o ftamvrsn.o
 		-@rm -f $(TOPDIR)libftam.a $(TOPDIR)llib-lftam
-		-@$(LN) libftam.a $(TOPDIR)libftam.a
-		-@$(LN) llib-lftam $(TOPDIR)llib-lftam
+		-cp libftam.a $(TOPDIR)libftam.a
+		-cp llib-lftam $(TOPDIR)llib-lftam
 		-@ls -l $@
 		-@echo "FTAM library built normally"
 

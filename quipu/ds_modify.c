@@ -47,7 +47,7 @@ extern AttributeType at_control;
 extern AttributeType at_acl;
 extern AttributeType at_objectclass;
 
-extern int inherit_set();
+static inherit_set (Entry e, struct DSError *error);
 
 Entry  nulledb;
 

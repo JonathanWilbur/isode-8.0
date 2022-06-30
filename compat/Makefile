@@ -103,8 +103,8 @@ libcompat.a:	compatvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			compatvrsn.o
 		-@rm -f $(TOPDIR)libcompat.a $(TOPDIR)llib-lcompat
-		-@$(LN) libcompat.a $(TOPDIR)libcompat.a
-		-@$(LN) llib-lcompat $(TOPDIR)llib-lcompat
+		-@cp libcompat.a $(TOPDIR)libcompat.a
+		-@cp llib-lcompat $(TOPDIR)llib-lcompat
 		-@ls -l $@
 		-@echo "COMPAT library built normally"
 

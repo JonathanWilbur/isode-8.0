@@ -114,8 +114,8 @@ libpusap2.a:	pusap2vrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			$(PS-O) pusap2vrsn.o
 		-@rm -f $(TOPDIR)libpusap2.a $(TOPDIR)llib-lpusap2
-		-@ln libpusap2.a $(TOPDIR)libpusap2.a
-		-@ln llib-lpusap2 $(TOPDIR)llib-lpusap2
+		-@cp libpusap2.a $(TOPDIR)libpusap2.a
+		-@cp llib-lpusap2 $(TOPDIR)llib-lpusap2
 		-@ls -l $@
 		-@echo "PUSAP2 library built normally"
 

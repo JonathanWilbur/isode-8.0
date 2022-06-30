@@ -29,6 +29,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/compat/RCS/logger.c,v 9.0 1992/
 
 #include <stdio.h>
 #include <stdarg.h>
+#include <unistd.h>
 #include <time.h>
 #include "general.h"
 #include "manifest.h"
@@ -79,7 +80,7 @@ ll_open (LLog *lp) {
 
 	if (llp == NULL
 			&& (llp = (struct ll_private *)
-					  calloc ((unsigned int) getdtablesize (),
+					  calloc ((unsigned int) sysconf (_SC_OPEN_MAX),
 							  sizeof *llp)) == NULL)
 		goto you_lose;
 

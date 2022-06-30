@@ -32,6 +32,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/quipu/RCS/sys_init.c,v 9.0 1992
 #include "logger.h"
 #include "usr.dirent.h"
 #include <sys/stat.h>
+#include <errno.h>
 
 extern char *dsaoidtable;
 extern LLog * log_dsap;
@@ -105,7 +106,7 @@ mk_dsa_tmp_dir (void) {
 			&& ((statbuf.st_mode & S_IFMT) == S_IFDIR)) {
 		/* tmpdir exists - clean it */
 		struct dirent **namelist;
-		_scandir(edbtmp_buf, &namelist, rmFiles, NULLIFP);
+		scandir(edbtmp_buf, &namelist, rmFiles, NULLIFP);
 		if (namelist)
 			free((char *) namelist);
 
@@ -137,5 +138,3 @@ struct dirent *entry;
 
 	return 0;
 }
-
-

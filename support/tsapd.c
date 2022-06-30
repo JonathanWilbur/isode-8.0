@@ -72,6 +72,14 @@ static char *rcsid = "$Header: /xtel/isode/isode/support/RCS/tsapd.c,v 9.0 1992/
 #endif
 #include "tailor.h"
 
+static	arginit (char	**vec);
+static	int	make_bind_args ( struct ds_bind_arg *ba, struct ds_bind_arg *br, struct ds_bind_error *be);
+static int  unbind_from_directory ();
+
+static	search_directory ( int	firstime );
+static int  rebind_to_directory ();
+static int  do_error ( struct DSError *de );
+
 /*  */
 
 static int  debug = 0;
@@ -943,8 +951,8 @@ char	**vec;
 		Attr_Sequence as;
 		AttributeType t_oc;
 		DN	    local_dn;
-		Filter	fi;
-		struct ds_search_arg *sa = &search_arg;
+		register Filter	fi;
+		register struct ds_search_arg *sa = &search_arg;
 
 		if ((t_ev = str2AttrT ("execVector")) == NULL)
 			adios (NULLCP, "unknown attribute type \"%s\"", "execVector");
@@ -997,9 +1005,9 @@ char	**vec;
 
 /*  */
 
-static	search_directory ( int	firstime;
+static	search_directory (int	firstime)
 {
-							)nt	    i;
+	int	    i;
 	struct ds_search_arg *sa = &search_arg;
 		struct ds_search_result search_result;
 			struct ds_search_result *sr = &search_result;
@@ -1385,7 +1393,7 @@ static int  rebind_to_directory () {
 
 /*  */
 
-static	int	make_bind_args ( struct ds_bind_arg *ba, *br; struct ds_bind_error *be) {
+static	int	make_bind_args ( struct ds_bind_arg *ba, struct ds_bind_arg *br, struct ds_bind_error *be) {
 	bzero ((char *) ba, sizeof *ba);
 	bzero ((char *) br, sizeof *br);
 	bzero ((char *) be, sizeof *be);
@@ -1423,11 +1431,11 @@ static int  unbind_from_directory () {
 
 /*  */
 
-static int  do_error ( struct DSError *de;
+static int  do_error ( struct DSError *de )
 {
 	if (de -> dse_type == DSE_REFERRAL
 			&& de -> ERR_REFERRAL.DSE_ref_candidates) {
-							 )egister struct access_point *ap;
+			register struct access_point *ap;
 			struct ds_bind_arg bind_arg,
 				bind_result;
 				struct ds_bind_arg *ba = &bind_arg,

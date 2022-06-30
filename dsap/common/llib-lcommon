@@ -1639,10 +1639,10 @@ check_known_oids ()
 	(void) check_known_oids();
 } 
 
-char * getline (file)
+char * isode_getline (file)
 FILE * file;
 {
-	return getline (file);
+	return isode_getline (file);
 }
 
 Attr_Sequence get_attributes_aux (file) 
@@ -2055,7 +2055,3 @@ nullcknonce(nonce)
 {
 	return nullcknonce(nonce);
 }
-
-
-
-

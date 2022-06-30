@@ -74,7 +74,7 @@ $(BINDIR)fred:	xfred
 		-rm -f $@
 		cp xfred $@
 		-rm -f $(SBINDIR)in.whitepages
-		if ln $@ $(SBINDIR)in.whitepages; \
+		if cp $@ $(SBINDIR)in.whitepages; \
 		    then exit 0; \
 		    else cp xfred $(SBINDIR)in.whitepages; \
 		fi
@@ -114,7 +114,7 @@ $(ETCDIR)fredrc: fredrc
 		    then exit 0; \
 		    else cp fredrc $@; chmod a+r $@; ls -gls $@; \
 		fi
-		if ln $(ETCDIR)fredrc $(ETCDIR)fredrc.old; \
+		if cp $(ETCDIR)fredrc $(ETCDIR)fredrc.old; \
 		    then rm -f $@ ; cp fredrc $@; chmod a+r $@ ; ls -gls $@; \
 		    else exit 0; \
 		fi
@@ -133,7 +133,7 @@ $(ETCDIR)ufnrc: true
 		    then exit 0; \
 		    else cp ufnrc $@; chmod a+r $@ ; ls -gls $@; \
 		fi
-		if ln $(ETCDIR)ufnrc $(ETCDIR)ufnrc.old; \
+		if cp $(ETCDIR)ufnrc $(ETCDIR)ufnrc.old; \
 		    then rm -f $@ ; cp ufnrc $@; chmod a+r $@ ; ls -gls $@; \
 		    else exit 0; \
 		fi

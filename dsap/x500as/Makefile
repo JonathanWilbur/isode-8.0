@@ -70,8 +70,8 @@ libx500as.a:	x500asvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			x500asvrsn.o
 		-@rm -f $(UPDIR)libx500as.a $(UPDIR)llib-lx500as
-		-@ln libx500as.a $(UPDIR)libx500as.a
-		-@$(LN) llib-lx500as $(UPDIR)llib-lx500as
+		-@cp libx500as.a $(UPDIR)libx500as.a
+		-cp llib-lx500as $(UPDIR)llib-lx500as
 		-@ls -l $@
 		-@echo "QUIPU X500 Abstract Syntax library built normally"
 
@@ -106,49 +106,49 @@ PEPSY.C:	DSE.ph $(PESPY-C)
 IF-types.h IF_tables.c: if.py if-cdefs.h $(PEPSY)
 		$(PEPSY) -i "if-cdefs.h" -A -m $(PYFLAGS) if.py
 		-@rm -f $(TOPDIR)h/quipu/IF*.h 
-		-@$(LN) IF-types.h $(TOPDIR)h/quipu/IF-types.h
+		-cp IF-types.h $(TOPDIR)h/quipu/IF-types.h
 
 AF-types.h AF_tables.c: af.py af-cdefs.h $(PEPSY)
 		$(PEPSY) -i "af-cdefs.h" -A -m $(PYFLAGS) af.py
 		-@rm -f $(TOPDIR)h/quipu/AF*.h 
-		-@$(LN) AF-types.h $(TOPDIR)h/quipu/AF-types.h
+		-cp AF-types.h $(TOPDIR)h/quipu/AF-types.h
 
 DO-types.h DO_tables.c: do.py do-cdefs.h $(PEPSY)
 	   	$(PEPSY) -i "do-cdefs.h" -A -m $(PYFLAGS) do.py
 		-@rm -f $(TOPDIR)h/quipu/DO*.h 
-		-@$(LN) DO-types.h $(TOPDIR)h/quipu/DO-types.h
+		-cp DO-types.h $(TOPDIR)h/quipu/DO-types.h
 	   	@echo "*** You can ignore WARNINGs about DAS.ph/2.5.1.2.ph ***"
 
 DAS-types.h DAS_tables.c: das.py das-cdefs.h $(PEPSY)
 	   	$(PEPSY) -i "das-cdefs.h" -A -m $(PYFLAGS) das.py
 		-@rm -f $(TOPDIR)h/quipu/DAS*.h
-		-@$(LN) DAS-types.h $(TOPDIR)h/quipu/DAS-types.h
+		-cp DAS-types.h $(TOPDIR)h/quipu/DAS-types.h
 
 Quipu-types.h Quipu_tables.c: qu.py qu-cdefs.h $(PEPSY)
 	   	$(PEPSY) -i "qu-cdefs.h" -A -m $(PYFLAGS) qu.py
 		-@rm -f $(TOPDIR)h/quipu/Quipu*.h 
-		-@$(LN) Quipu-types.h $(TOPDIR)h/quipu/Quipu-types.h
+		-cp Quipu-types.h $(TOPDIR)h/quipu/Quipu-types.h
 
 SA-types.h SA_tables.c: sa.py if-cdefs.h $(PEPSY)
 	   	$(PEPSY) -i "if-cdefs.h" -A -m $(PYFLAGS) sa.py
 		-@rm -f $(TOPDIR)h/quipu/SA*.h 
-		-@$(LN) SA-types.h $(TOPDIR)h/quipu/SA-types.h
+		-cp SA-types.h $(TOPDIR)h/quipu/SA-types.h
 
 Thorn-types.h Thorn_tables.c: th.py if-cdefs.h $(PEPSY)
 	   	$(PEPSY) -i "if-cdefs.h" -A -m $(PYFLAGS) th.py
 		-@rm -f $(TOPDIR)h/quipu/Thorn*.h 
-		-@$(LN) Thorn-types.h $(TOPDIR)h/quipu/Thorn-types.h
+		-cp Thorn-types.h $(TOPDIR)h/quipu/Thorn-types.h
 
 NRS-types.h NRS_tables.c: nrs.py nrs-cdefs.h $(PEPSY)
 	   	$(PEPSY) -i "nrs-cdefs.h" -A -m $(PYFLAGS) nrs.py
 		-@rm -f $(TOPDIR)h/quipu/NRS*.h 
-		-@$(LN) NRS-types.h $(TOPDIR)h/quipu/NRS-types.h
+		-cp NRS-types.h $(TOPDIR)h/quipu/NRS-types.h
 
 DSE.ph:		$(TOPDIR)acsap/DSE.ph
 		-@rm -f DSE.ph
-		-$(LN) $(TOPDIR)acsap/DSE.ph DSE.ph
+		-cp $(TOPDIR)acsap/DSE.ph DSE.ph
 		-@rm -f DSE*.h
-		-$(LN) $(TOPDIR)acsap/DSE-types.h DSE-types.h
+		-cp $(TOPDIR)acsap/DSE-types.h DSE-types.h
 
 #######################################################
 # install headers

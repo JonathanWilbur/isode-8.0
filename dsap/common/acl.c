@@ -44,7 +44,6 @@ int acl_info_cmp ();
 static int acl_info_comp_cmp ();
 static struct acl * str2acl_aux ();
 
-static struct acl * acl_cpy (struct acl *aclptr);
 static struct acl_attr * acl_attr_cpy (struct acl_attr *aclptr, struct acl_info *dflt);
 
 static

@@ -138,7 +138,7 @@ libdish-shared: dishvrsn.o
 		@for i in libdish.s[ao]* ;\
 		do \
 			rm -f $(TOPDIR)$$i; \
-			$(LN) $$i $(TOPDIR)$$i; \
+			cp $$i $(TOPDIR)$$i; \
 			ls -l $$i; \
 		done
 		@echo "shared DISH library built normally"

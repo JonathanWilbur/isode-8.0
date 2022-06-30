@@ -90,8 +90,8 @@ libssap.a:	ssapvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			ssapvrsn.o
 		-@rm -f $(TOPDIR)libssap.a $(TOPDIR)llib-lssap
-		-@$(LN) libssap.a $(TOPDIR)libssap.a
-		-@$(LN) llib-lssap $(TOPDIR)llib-lssap
+		-cp libssap.a $(TOPDIR)libssap.a
+		-cp llib-lssap $(TOPDIR)llib-lssap
 		-@ls -l $@
 		-@echo "SSAP library built normally"
 

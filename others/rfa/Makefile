@@ -84,7 +84,7 @@ $(BINDIR)llock:	xllock
 		-rm -f $@
 		-rm -f $(BINDIR)lunlock
 		cp xllock $@
-		ln $@ $(BINDIR)lunlock 
+		cp $@ $(BINDIR)lunlock 
 		-@ls -gls $@
 		-@echo ""
 
@@ -244,5 +244,3 @@ $(ETCDIR)rfatailor:	rfatailor
 clean:;		rm -f *.o *.a RFA* x* z* _* core
 
 true:;
-
-

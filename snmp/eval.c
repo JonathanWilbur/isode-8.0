@@ -29,6 +29,12 @@ static char *rcsid = "$Header: /xtel/isode/isode/snmp/RCS/eval.c,v 9.0 1992/06/1
 #include <stdio.h>
 #include "mib.h"
 
+static int  eval_expr (struct expr *e);
+static int  read_tl (struct expr *e, PElementClass *class, PElementForm  *form, PElementID    *id, PElementLen   *len);
+static int  read_long (struct expr *e, char   *base, int	len, PElementForm  form, integer *result);
+static int  read_oid (struct expr *e, char   *base, int	len, PElementForm  form, OID   *ox);
+static int  get_var_value (struct expr *e, OID	oid, integer *i);
+
 /*    FUNCTION MIB */
 
 #define	NSTACK	10

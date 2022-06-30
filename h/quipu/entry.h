@@ -55,6 +55,9 @@ struct acl {                    /* represents ACL                       */
 #define acl_alloc()  (struct acl *) smalloc (sizeof (struct acl));
 #define NULLACL (struct acl *)NULL
 
+static struct acl * acl_cpy (struct acl *aclptr);
+static struct acl * str2acl (char *str);
+
 struct acl * acl_cpy();
 struct acl * str2acl();
 
@@ -176,6 +179,9 @@ struct tree_struct {            /* represents TreeStructure             */
 #define NULLTREE ((struct tree_struct *)0)
 #define tree_struct_alloc()     (struct tree_struct *) smalloc (sizeof (struct tree_struct))
 
+static struct tree_struct * tree_struct_cpy (struct tree_struct *a);
+static struct tree_struct * str2schema (char *str);
+
 struct tree_struct * tree_struct_cpy ();
 struct tree_struct * str2schema ();
 
@@ -219,6 +225,10 @@ struct edb_info {               /* represent EDBInfo                    */
 #define NULLEDB ((struct edb_info *) 0)
 
 #define edb_info_alloc()   (struct edb_info *) smalloc (sizeof (struct edb_info));
+
+static struct edb_info * edb_info_cpy (struct edb_info *a);
+static struct edb_info * str2update (char *str);
+
 struct edb_info * edb_info_cpy ();
 struct edb_info * str2update ();
 

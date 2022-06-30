@@ -31,6 +31,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/vt/RCS/vt.c,v 9.0 1992/06/16 12
 #include "tailor.h"
 
 #ifndef SVR4_UCB
+#include "asm_ioctls.h"
 #include <sys/ioctl.h>
 #endif
 #ifdef TERMIOS
@@ -38,7 +39,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/vt/RCS/vt.c,v 9.0 1992/06/16 12
 #endif
 #include <ctype.h>
 #include <setjmp.h>
-#include <varargs.h>
+#include <stdarg.h>
 
 #define	strip(x)	((x)&0177)
 #define TBUFSIZ		1024
@@ -100,11 +101,30 @@ struct dispatch {
 
 struct dispatch *getds ();
 
+static rcinit (void);
+static int    ncols (fp);
+static int vt_help (char **vec);
+static struct var * getvar (char *name);
+static char ** getval (char *name, char **choices);
+static int set_debug (struct var *v);
+static int set_echo (struct var *v);
+static int set_escape (struct var *v);
+static int set_repertoire (struct var *v);
+static printvar (struct var *v);
+static int vt_open (char **vec);
+static int vt_close (char **vec);
+static int vt_quit (char *vec);
+static int vt_status (char **vec);
+static int vt_suspend (char **vec);
+static int vt_escape (char **vec);
+static int vt_set (char **vec);
+static int vtploop (char **vec, int error);
 
 int	vt_open (), vt_close (), vt_quit (), vt_status (), vt_suspend ();
 int	vt_ayt (), vt_break (), vt_escape ();
 int	vt_set (), vt_help ();
 
+int fd;
 
 static struct dispatch dispatches[] = {
 	"ayt", vt_ayt, DS_OPEN,
@@ -298,7 +318,7 @@ command (int top) {
 		signal (SIGINT, SIG_DFL);
 	eof = 0;
 	for (;;) {
-		if (getline ("%s> ", line) == NOTOK) {
+		if (vt_getline ("%s> ", line) == NOTOK) {
 			if (eof) {
 				if (!connected)
 					exit (0);
@@ -363,7 +383,7 @@ vtploop (char **vec, int error) {
 /*  */
 
 int
-getline (char *prompt, char *buffer) {
+vt_getline (char *prompt, char *buffer) {
 	int    i;
 	char  *cp,
 		  *ep;
@@ -448,7 +468,7 @@ getds (char *name) {
 static int
 vt_open (char **vec) {
 	if (*++vec == NULL) {
-		if (getline ("host: ", line) == NOTOK
+		if (vt_getline ("host: ", line) == NOTOK
 				|| str2vecX (line, vec, 0, NULLIP, NULL, 0) < 1)
 			return NOTOK;
 	}
@@ -570,7 +590,7 @@ vt_escape (char **vec) {
 	char   c;
 
 	if (*++vec == NULL) {
-		if (getline ("new escape character: ", line) == NOTOK
+		if (vt_getline ("new escape character: ", line) == NOTOK
 				|| str2vec (line, vec) < 1)
 			return NOTOK;
 	}
@@ -1505,17 +1525,16 @@ finalbye (void) {
 
 
 #ifndef	lint
-void	adios (va_alist)
-va_dcl {
+void	adios (char* what, ...) {
 	int	    code;
 	va_list ap;
 	static int latched = 0;
 
-	va_start (ap);
+	va_start (ap, what);
 
 	code = va_arg (ap, int);
 
-	_ll_log (vt_log, code, ap);
+	_ll_log (vt_log, code, what, ap);
 
 	va_end (ap);
 
@@ -1535,16 +1554,12 @@ adios (char *what, char *fmt) {
 
 
 #ifndef	lint
-void	advise (va_alist)
-va_dcl {
-	int	    code,
-	flags;
+void	advise (int code, ...) {
+	int flags;
 	char    buffer[BUFSIZ];
 	va_list ap;
 
-	va_start (ap);
-
-	code = va_arg (ap, int);
+	va_start (ap, code);
 
 	asprintf (buffer, ap);
 

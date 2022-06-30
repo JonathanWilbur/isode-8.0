@@ -100,8 +100,8 @@ libtusap.a:	tsapvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			tsapvrsn.o
 		-@rm -f $(TOPDIR)libtusap.a $(TOPDIR)llib-ltusap
-		-@ln libtusap.a $(TOPDIR)libtusap.a
-		-@ln llib-ltusap $(TOPDIR)llib-ltusap
+		-@cp libtusap.a $(TOPDIR)libtusap.a
+		-@cp llib-ltusap $(TOPDIR)llib-ltusap
 		-@ls -l $@
 		-@echo "HULA TuSAP library built normally"
 

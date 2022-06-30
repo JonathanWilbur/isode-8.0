@@ -41,7 +41,7 @@ static	char *rcsid = "$Header: /xtel/isode/isode/ftam-ftp/RCS/ftp.c,v 9.0 1992/0
 
 #include <stdio.h>
 #include <errno.h>
-#include <varargs.h>
+#include <stdarg.h>
 
 #include "ftp_var.h"
 #include "logger.h"
@@ -63,6 +63,22 @@ struct	sockaddr_in myctladdr;
 
 FILE	*cin, *cout;
 int	dataconn();
+
+
+char	typename[32];
+char	structname[32];
+int	stru;
+char	formname[32];
+int	form;
+char	modename[32];
+int	mode;
+int	bytesize;
+char	*hostname;
+int	options;
+int sys_nerr;
+char *sys_errlist[];
+char ftp_error_buffer[BUFSIZ];
+char *ftp_error; /* points to FTP diagnostic string */
 
 
 ftp_init() {
@@ -94,7 +110,7 @@ int port;
 		static struct hostent def;
 		static struct in_addr defaddr;
 		static char namebuf[128];
-		u_long inet_addr();
+		in_addr_t inet_addr();
 
 		defaddr.s_addr = inet_addr(host);
 		if (defaddr.s_addr == -1) {
@@ -157,6 +173,48 @@ bad:
 	return (NOTOK);
 }
 
+#ifndef	lint
+int command(char *fmt, ...) {
+	int	    val;
+	va_list ap;
+
+	va_start (ap, fmt);
+
+	val = _command (ap);
+
+	va_end (ap);
+
+	return val;
+}
+
+int _command(ap)
+va_list ap;
+{
+	char buffer[BUFSIZ];
+
+	if (cout == NULL) {
+		sprintf(ftp_error,"No control connection for command %s",
+				(errno <= sys_nerr)? sys_errlist[errno]:"");
+		return (NOTOK);
+	}
+
+	_asprintf (buffer, NULLCP, ap);
+	fprintf (cout, "%s\r\n", buffer);
+	fflush(cout);
+	if (verbose)
+		advise (LLOG_DEBUG, NULLCP, "<--- %s", buffer);
+	return (getreply(!strcmp(buffer, "QUIT")));
+}
+#else
+/* VARARGS1 */
+
+command (fmt)
+char   *fmt;
+{
+	return command (fmt);
+}
+#endif
+
 login(user,pass,acct)
 char *user, *pass, *acct;
 {
@@ -187,49 +245,6 @@ char *user, *pass, *acct;
 	}
 	return (OK);
 }
-
-#ifndef	lint
-command(va_alist)
-va_dcl {
-	int	    val;
-	va_list ap;
-
-	va_start (ap);
-
-	val = _command (ap);
-
-	va_end (ap);
-
-	return val;
-}
-
-_command(ap)
-va_list ap;
-{
-	char buffer[BUFSIZ];
-
-	if (cout == NULL) {
-		sprintf(ftp_error,"No control connection for command %s",
-				(errno <= sys_nerr)? sys_errlist[errno]:"");
-		return (NOTOK);
-	}
-
-	_asprintf (buffer, NULLCP, ap);
-	fprintf (cout, "%s\r\n", buffer);
-	fflush(cout);
-	if (verbose)
-		advise (LLOG_DEBUG, NULLCP, "<--- %s", buffer);
-	return (getreply(!strcmp(buffer, "QUIT")));
-}
-#else
-/* VARARGS1 */
-
-command (fmt)
-char   *fmt;
-{
-	return command (fmt);
-}
-#endif
 
 #include <ctype.h>
 

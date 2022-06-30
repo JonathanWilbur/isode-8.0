@@ -91,6 +91,7 @@ ftpd-ftam:	xftpd-ftam
 xftpd-ftam:	ftpd.o ftpcmd.o vers.o $(OFILES) $(DOCS-O) $(LIBD)
 		$(LDCC) $(LDFLAGS) -o $@ ftpd.o ftpcmd.o vers.o $(OFILES) \
 			$(DOCS-O) $(LIBES) $(LSOCKET)
+		-@echo "XFTAMD-FTAM library built normally"
 
 l-ftpd-ftam:	ftpcmd.c vers.c true
 		$(LINT) $(LFLAGS) -DBRIDGE -I$(FTAM) ftpd.c ftpcmd.c \

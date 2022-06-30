@@ -92,8 +92,8 @@ libpsap2.a:	psap2vrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			PS_tables.o psap2vrsn.o
 		-@rm -f $(TOPDIR)libpsap2.a $(TOPDIR)llib-lpsap2
-		-@$(LN) libpsap2.a $(TOPDIR)libpsap2.a
-		-@$(LN) llib-lpsap2 $(TOPDIR)llib-lpsap2
+		-cp libpsap2.a $(TOPDIR)libpsap2.a
+		-cp llib-lpsap2 $(TOPDIR)llib-lpsap2
 		-@ls -l $@
 		-@echo "PSAP2 library built normally"
 

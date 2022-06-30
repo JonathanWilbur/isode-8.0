@@ -26,7 +26,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/quipu/RCS/dsa.c,v 9.0 1992/06/1
 
 #include <signal.h>
 #include <stdio.h>
-#include <varargs.h>
+#include <stdarg.h>
 #include "quipu/util.h"
 #include <sys/stat.h>
 #include "sys.file.h"
@@ -60,7 +60,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/quipu/RCS/dsa.c,v 9.0 1992/06/1
 #include "x25.h"
 #endif
 
-PS      opt;
+extern PS      opt;
 static  int   debug = 1;
 static  int   nbits = FD_SETSIZE;
 
@@ -76,7 +76,6 @@ void   Remove_openCall_attribute() ;
 
 static  char *myname;
 
-void    adios (), advise ();
 void    mk_dsa_tmp_dir();
 static  envinit (), setdsauid();
 SFD attempt_restart();
@@ -115,12 +114,13 @@ extern struct SecurityServices *dsap_security;
 
 char ** sargv;
 
+static	osisecinit(int *argc, char ***argv, int	fn);
+
 int
 main (int argc, char **argv) {
 #ifdef SBRK_DEBUG
 	unsigned proc_size = 0;
 	unsigned new_size;
-	extern caddr_t sbrk();
 #endif
 	extern char *treedir;
 	extern char	* mydsaname;
@@ -627,13 +627,12 @@ fork_ok:
 	/* 	ERRORS */
 
 #ifndef	lint
-	void    adios (va_alist)
-	va_dcl {
+	void    adios (char *what, ...) {
 		va_list ap;
 
-		va_start (ap);
+		va_start (ap, what);
 
-		_ll_log (log_dsap, LLOG_FATAL, ap);
+		_ll_log (log_dsap, LLOG_FATAL, what, ap);
 
 		va_end (ap);
 
@@ -654,16 +653,15 @@ fork_ok:
 #endif
 
 #ifndef	lint
-	void    advise (va_alist)
-	va_dcl {
-		int     code;
+	void    advise (int code, ...) {
+		char *what;
 		va_list ap;
 
-		va_start (ap);
+		va_start (ap, code);
 
-		code = va_arg (ap, int);
+		what = va_arg (ap, int);
 
-		_ll_log (log_dsap, code, ap);
+		_ll_log (log_dsap, code, what, ap);
 
 		va_end (ap);
 	}
@@ -930,5 +928,3 @@ fork_ok:
 
 #endif
 	}
-
-

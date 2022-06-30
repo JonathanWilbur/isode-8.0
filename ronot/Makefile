@@ -83,8 +83,8 @@ libronot.a:	ronotvrsn.o
 		@$(UTILDIR)make-lib.sh $(SYSTEM) $(ARFLAGS) $@ $(OFILES) \
 			ronotvrsn.o
 		-@rm -f $(TOPDIR)libronot.a $(TOPDIR)llib-lronot
-		-@$(LN) libronot.a $(TOPDIR)libronot.a
-		-@$(LN) llib-lronot $(TOPDIR)llib-lronot
+		-cp libronot.a $(TOPDIR)libronot.a
+		-cp llib-lronot $(TOPDIR)llib-lronot
 		-@ls -l $@
 		-@echo "RO-notation library built normally"
 
