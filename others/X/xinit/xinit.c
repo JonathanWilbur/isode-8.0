@@ -386,11 +386,11 @@ processTimeout (int pid, int timeout, char *string) {
 
 int
 Error (char *fmt, int x0, int x1, int x2, int x3, int x4, int x5, int x6, int x7, int x8, int x9) {
-	extern char	*sys_errlist[];
+	extern char	*isode_sys_errlist[];
 
 	fprintf(stderr, "%s:  ", program);
 	if (errno > 0 && errno < sys_nerr)
-		fprintf (stderr, "%s (errno %d):  ", sys_errlist[errno], errno);
+		fprintf (stderr, "%s (errno %d):  ", isode_sys_errlist[errno], errno);
 	fprintf(stderr, fmt, x0,x1,x2,x3,x4,x5,x6,x7,x8,x9);
 }
 

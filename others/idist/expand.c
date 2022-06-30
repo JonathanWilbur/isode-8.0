@@ -316,7 +316,7 @@ patherr1:
 	closedir(dirp);
 patherr2:
 	strcat(path, ": ");
-	strcat(path, sys_errlist[errno]);
+	strcat(path, isode_sys_errlist[errno]);
 	yyerror(path);
 }
 

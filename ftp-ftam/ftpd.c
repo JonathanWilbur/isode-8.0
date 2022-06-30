@@ -78,7 +78,7 @@ void adios (), advise ();
  */
 #define	FTPUSERS	"/usr/etc/ftpusers"
 
-char *sys_errlist[];
+char *isode_sys_errlist[];
 extern  char ftam_error[];
 extern	char version[];
 
@@ -296,7 +296,7 @@ char *name;
 		reply(425, "Can't create data socket (%s,%d): %s.",
 			  inet_ntoa(data_source.sin_addr),
 			  ntohs(data_source.sin_port),
-			  sys_errlist[errno]);
+			  isode_sys_errlist[errno]);
 		return (NOTOK);
 	}
 	reply(150, "Opening data connection for %s (%s,%d).",
@@ -309,7 +309,7 @@ char *name;
 			continue;
 		}
 		reply(425, "Can't build data connection: %s.",
-			  sys_errlist[errno]);
+			  isode_sys_errlist[errno]);
 		close(data);
 		data = -1;
 		return (NOTOK);

@@ -1360,9 +1360,9 @@ writev (
 
 	static char *
 	_SysErrorMsg (int n) {
-		extern char *sys_errlist[];
+		extern char *isode_sys_errlist[];
 		extern int sys_nerr;
-		char *s = ((n >= 0 && n < sys_nerr) ? sys_errlist[n] : "unknown error");
+		char *s = ((n >= 0 && n < sys_nerr) ? isode_sys_errlist[n] : "unknown error");
 
 		return (s ? s : "no such error");
 	}

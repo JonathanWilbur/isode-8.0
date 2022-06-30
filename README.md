@@ -3,11 +3,11 @@
 ## Usage
 
 ```shell
-sudo apt update
-sudo apt install -y build-essential git bison flex
+apt update
+apt install -y build-essential git bison flex
 git clone https://github.com/bl00mber/isode-8.0.git
 cd isode-8.0
 ./make cp-files
 ./make everything
-sudo ./make inst-everything
+./make inst-everything
 ```

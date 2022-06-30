@@ -83,7 +83,7 @@ extern	char *tail();
 extern	char *remglob();
 extern	int errno;
 extern	int sys_nerr;
-extern	char *sys_errlist[];
+extern	char *isode_sys_errlist[];
 
 /* global interface variables */
 extern int ftp_directory;/* TRUE if last ftp_exist was a multiple listing */

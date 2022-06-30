@@ -296,9 +296,9 @@ fatal (int f, char *msg) {
 int
 fatalperror (int f, char *msg, int errnum) {
 	char buf[BUFSIZ];
-	char *sys_errlist[errnum];
+	char *isode_sys_errlist[errnum];
 
-	sprintf(buf, "%s: %s", msg, sys_errlist[errnum]);
+	sprintf(buf, "%s: %s", msg, isode_sys_errlist[errnum]);
 	fatal(f, buf);
 }
 
