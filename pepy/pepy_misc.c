@@ -28,6 +28,7 @@ static char *rcsid = "$Header: /xtel/isode/isode/pepy/RCS/pepy_misc.c,v 9.0 1992
 #include <ctype.h>
 #include <stdio.h>
 #include "pepy.h"
+#include "../h/psap.h"
 
 /*  Oid manipulation */
 
@@ -316,7 +317,7 @@ initoidtbl()  {
 	}
 }
 
-char	*oidprint (oid)
+char    *oidprint (oid)
 OID	oid;
 {
 	static char buf[BUFSIZ];
@@ -352,5 +353,3 @@ OID	oid;
 	strcat (cp, " }");
 	return buf;
 }
-
-

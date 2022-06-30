@@ -58,9 +58,12 @@ make-dirs:;	@for i in $(BINDIR) $(SBINDIR) $(ETCDIR) $(LOGDIR) \
 			sed -e 's%\(.*\)/ X%chmod 777 \1%' | \
 			sh -v
 		
-cp-files:;	cp config/linux.h h/config.h
-		cp config/linux.make config/CONFIG.make
+cp-files:
+		cp config/linux.h h/config.h
 		cp config/*.local support/
+
+config/CONFIG.make:
+		cp config/linux.make config/CONFIG.make
 
 install:	inst-all clean
 
